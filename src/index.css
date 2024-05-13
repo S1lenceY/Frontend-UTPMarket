@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 .light {
-    --background: 226 232 240;
-    --titlecolor: 55 65 81;
-    --subtitlecolor: 17 24 39;
+    --background: 239 245 254;
+    --titlecolor: 62, 69, 88;
+    --subtitlecolor: 67, 74, 93;
     --hoverbordercolor: 99 99 246;
     --bordercolor: 148 163 184;
     --inputbackground: 255 255 255;

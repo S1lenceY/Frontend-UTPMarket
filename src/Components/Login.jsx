@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import withSplashScreen from "../Loader/withSplashScreen";
 import LogoLogin from "../Assets/LogoLogin.png";
-import LogoUTPilot from "../Assets/LogoUTPilot.png";
 import LogoUTP from "../Assets/LogoUTP.png";
 import { HiOutlineEye, HiOutlineEyeOff, HiOutlineMail } from "react-icons/hi";
 import { useAuthContext } from "../Auth/authContext";
@@ -71,21 +70,20 @@ const Login = () => {
           <img
             src={LogoLogin}
             alt=""
-            className=" h-[600px] w-[600px] mr-24 hidden md:block"
+            className=" h-[500px] w-[500px] mr-24 hidden md:block"
           />
         </div>
         <div className="flex flex-col w-[380px] md:p-2 p-10">
-          <div className="flex h-9">
+          <div className="flex h-9 w-[120px]">
             <img src={LogoUTP} alt="" />
-            <img src={LogoUTPilot} alt="" />
           </div>
           <div className="mt-5">
             <div className="mb-4">
               <p className=" text-2xl text-titlecolor font-semibold">
-                El futuro del aprendizaje digital al alcance de tus manos.
+                La nueva experiencia digital de marketplace
               </p>
               <span className=" text-xl font-light text-subtitlecolor">
-                Hecho por alumnos UTP
+                Agradable, facil y dinámica
               </span>
             </div>
             <div className="flex flex-col">
@@ -135,13 +133,13 @@ const Login = () => {
                   href="https://contrasena.utp.edu.pe/Recuperacion/OlvideMiClave.aspx"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className=" self-end text-sm text-hoverbordercolor mb-5"
+                  className=" self-end text-sm text-hoverbordercolor mb-5 text-[#3E4558]"
                 >
                   Olvidé mi contraseña
                 </a>
 
                 <button
-                  className="lg:w-28 py-2.5 bg-[#5b36f2] text-white border-none rounded-md text-sm font-base cursor-pointer relative group focus:text-transparent focus:bg-slate-300"
+                  className="lg:w-28 py-2.5 bg-[#2A3247] text-white border-none rounded-md text-sm font-base cursor-pointer relative group focus:text-transparent focus:bg-slate-300"
                   type="submit" //Cambiar a "button" si se quiere dejar de hacer submit
                 >
                   Iniciar Sesión
