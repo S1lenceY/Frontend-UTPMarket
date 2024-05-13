@@ -6,7 +6,7 @@ import { BiDish } from "react-icons/bi";
 import { GoHome, GoGift } from "react-icons/go";
 import ThemeButton from "../Utils/ThemeButton";
 import Header from "./Header";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { INICIO, PRODUCTOS, CANJEAR, CARRITO } from "../../Path/Paths";
 
 const Sidebar = () => {
