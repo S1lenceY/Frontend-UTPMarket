@@ -1,8 +1,8 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Estimados, no olvidar ejecutar "npm install" en la consola con la ruta del proyecto; luego ejecutar "npm run dev".
 
-Currently, two official plugins are available:
+Respecto al Login, ejecutar en otro Terminal el siguiente comando "npx json-server --watch db.json". Con esto no es necesario escribir ninguna credencial
+en los inputs, directamente presionen el botón de Iniciar Sesion y debería logearlos correctamente.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+PSDTA: Los colores los iré corrigiendo en el transcurso del tiempo (Sidebar y Modo oscuro), calma y buen humor para todo muchachos!
