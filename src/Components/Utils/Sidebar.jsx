@@ -67,8 +67,8 @@ const Sidebar = () => {
         <Link
           id={INICIO}
           to={INICIO}
-          className={`text-white flex flex-col items-center justify-center h-20 gap-2 ${
-            selectedLink === INICIO ? "bg-background text-[#000f37]" : ""
+          className={` flex flex-col items-center justify-center h-20 gap-2 ${
+            selectedLink === INICIO ? "bg-background text-[#000f37]" : "text-white"
           }`}
           onClick={() => handleLinkClick(INICIO)}
         >
@@ -78,8 +78,8 @@ const Sidebar = () => {
         <Link
           id={PRODUCTOS}
           to={PRODUCTOS}
-          className={`text-white flex flex-col items-center justify-center h-20 gap-2 ${
-            selectedLink === PRODUCTOS ? "bg-background text-[#000f37]" : ""
+          className={` flex flex-col items-center justify-center h-20 gap-2 ${
+            selectedLink === PRODUCTOS ? "bg-background text-[#000f37]" : "text-white"
           }`}
           onClick={() => handleLinkClick(PRODUCTOS)}
         >
@@ -89,8 +89,8 @@ const Sidebar = () => {
         <Link
           id={CANJEAR}
           to={CANJEAR}
-          className={`text-white flex flex-col items-center justify-center h-20 gap-2 ${
-            selectedLink === CANJEAR ? "bg-background text-[#000f37]" : ""
+          className={` flex flex-col items-center justify-center h-20 gap-2 ${
+            selectedLink === CANJEAR ? "bg-background text-[#000f37]" : "text-white"
           }`}
           onClick={() => handleLinkClick(CANJEAR)}
         >
@@ -100,8 +100,8 @@ const Sidebar = () => {
         <Link
           id={CARRITO}
           to={CARRITO}
-          className={`text-white flex flex-col items-center justify-center h-20 gap-2 ${
-            selectedLink === CARRITO ? "bg-background text-[#000f37]" : ""
+          className={` flex flex-col items-center justify-center h-20 gap-2 ${
+            selectedLink === CARRITO ? "bg-background text-[#000f37]" : "text-white"
           }`}
           onClick={() => handleLinkClick(CARRITO)}
         >
@@ -142,8 +142,8 @@ const Sidebar = () => {
           <Link
             id={INICIO}
             to={INICIO}
-            className={`text-white flex items-center py-4 px-6 gap-10 mb-10 ${
-              selectedLink === INICIO ? "bg-background text-[#000f37]" : ""
+            className={` flex items-center py-4 px-6 gap-10 mb-10 ${
+              selectedLink === INICIO ? "bg-background text-[#000f37]" : "text-white"
             }`}
             onClick={() => handleLinkClick(INICIO)}
           >
@@ -153,8 +153,8 @@ const Sidebar = () => {
           <Link
             id={PRODUCTOS}
             to={PRODUCTOS}
-            className={`text-white flex items-center py-4 px-6 gap-10 mb-10 ${
-              selectedLink === PRODUCTOS ? "bg-background text-[#000f37]" : ""
+            className={` flex items-center py-4 px-6 gap-10 mb-10 ${
+              selectedLink === PRODUCTOS ? "bg-background text-[#000f37]" : "text-white"
             }`}
             onClick={() => handleLinkClick(PRODUCTOS)}
           >
@@ -164,8 +164,8 @@ const Sidebar = () => {
           <Link
             id={CANJEAR}
             to={CANJEAR}
-            className={`text-white flex items-center py-4 px-6 gap-10 mb-10 ${
-              selectedLink === CANJEAR ? "bg-background text-[#000f37]" : ""
+            className={` flex items-center py-4 px-6 gap-10 mb-10 ${
+              selectedLink === CANJEAR ? "bg-background text-[#000f37]" : "text-white"
             }`}
             onClick={() => handleLinkClick(CANJEAR)}
           >
@@ -175,8 +175,8 @@ const Sidebar = () => {
           <Link
             id={CARRITO}
             to={CARRITO}
-            className={`text-white flex items-center py-4 px-6 gap-10 mb-10 ${
-              selectedLink === CARRITO ? "bg-background text-[#000f37]" : ""
+            className={` flex items-center py-4 px-6 gap-10 mb-10 ${
+              selectedLink === CARRITO ? "bg-background text-[#000f37]" : "text-white"
             }`}
             onClick={() => handleLinkClick(CARRITO)}
           >
