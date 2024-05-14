@@ -1,11 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiOutlineDollar } from "react-icons/ai";
 
 const Productos = () => {
+
+  //Añadir precio total al carrito:
+  const [totalPrice, setTotalPrice] = React.useState(0);
+
+  //Logica para añadir los datos del carrito al local storage
+  const [cartItems, setCartItems] = useState([]);
+
+   // Manejar clic en "Agregar al carrito"
+   const handleAddToCart = (product) => {
+    const quantity = parseFloat(
+      document.getElementById(`quantity_${product.id_producto}`).value
+    );
+    const newItem = {
+      id_comprobante: Math.floor(Math.random() * 1000), // Cambiar esto por el ID real
+      id_producto: product.id_producto,
+      cantidad: quantity,
+      precio: product.price,
+      estado_entrega: false,
+      estado_pago: false,
+    };
+    const updatedCart = [...cartItems, newItem];
+    setCartItems(updatedCart);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+
+    updateTotalPrice(updatedCart);
+  };
+
+  console.log(cartItems);
+
+  // Actualizar el precio total
+  const updateTotalPrice = (cart) => {
+    const total = cart.reduce((acc, item) => acc + item.cantidad * item.precio, 0);
+    setTotalPrice(total);
+  };
+
+
   //Cambiar esto por la recepción de datos que me den en el API
   const data = [
     {
+      id_producto: 1,
       name: "Pan Blanco",
       img: "/src/Assets/PanBlanco.jpg",
       id_category: "Panaderia",
@@ -13,20 +50,7 @@ const Productos = () => {
       coin: 1.0,
     },
     {
-      name: "Pan Blanco",
-      img: "/src/Assets/PanBlanco.jpg",
-      id_category: "Panaderia",
-      price: 1.5,
-      coin: 3.0,
-    },
-    {
-      name: "Pan Blanco",
-      img: "/src/Assets/PanBlanco.jpg",
-      id_category: "Panaderia",
-      price: 1.5,
-      coin: 2.0,
-    },
-    {
+      id_producto: 4,
       name: "Vodka",
       img: "/src/Assets/PanBlanco.jpg",
       id_category: "Licores",
@@ -47,8 +71,8 @@ const Productos = () => {
   return (
     <>
       {Object.entries(groupedProducts).map(([category, products]) => (
-        <div key={category} className="flex flex-col">
-          <div className="bg-white p-3 text-lg md:p-3 md:text-2xl gap-2 flex font-bold mt-4">
+        <div key={category} className="flex flex-col mb-4">
+          <div className="bg-white p-3 text-lg md:p-3 md:text-2xl gap-2 flex font-bold">
             <span>|</span> {category}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4 gap-8">
@@ -71,12 +95,13 @@ const Productos = () => {
                     </span>
                   </div>
                 </div>
-                <div className="flex justify-between p-4">
+                <div className="flex justify-between p-4"> 
                   <input
                     type="number"
+                    id={`quantity_${product.id_producto}`}
                     className="w-20 outline-none p-1.5 bg-slate-300 rounded-md "
                   />
-                  <button className="bg-[#292929] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition">
+                  <button className="bg-[#292929] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition" onClick={() => handleAddToCart(product)}>
                     Agregar al carrito
                   </button>
                 </div>
@@ -86,12 +111,12 @@ const Productos = () => {
         </div>
       ))}
 
-      <div className="bg-[#000f37] p-3 md:p-4 rounded-sm text-white flex items-center gap-2 text-sm font-bold fixed right-3 md:right-6 translate-y-4">
-        S/ 15.0
+      <div className="bg-[#000f37] p-3 md:p-4 rounded-full md:rounded-sm text-white flex items-center gap-2 text-sm font-bold fixed right-3 md:right-6">
+        S/ {totalPrice.toFixed(1)}
         <MdOutlineShoppingCart className="text-lg" />
       </div>
     </>
   );
-};
+}; 
 
 export default Productos;
