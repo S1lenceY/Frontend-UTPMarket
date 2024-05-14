@@ -13,7 +13,7 @@ const Header = ({ handleMenuClick }) => {
           className="absolute cursor-pointer top-0 left-0 bg-[#000f37] w-14 h-14 flex items-center justify-center text-white text-2xl"
           onClick={handleMenuClick}
         >
-          <IoIosMenu />
+          <IoIosMenu /> 
         </div>
         <div className="flex items-center">
           <img
@@ -21,19 +21,19 @@ const Header = ({ handleMenuClick }) => {
             alt=""
             className=" h-7 hidden md:block ml-20 md:ml-36"
           />
-          <div className="flex bg-gray-200 items-center p-2 rounded-xl gap-2 text-lg ml-20 md:ml-8">
+          <div className="flex bg-[#EFF5FE] items-center p-2 rounded-xl gap-2 text-lg ml-20 md:ml-8">
             <input
               type="search"
-              placeholder="Buscar"
-              className=" w-20 md:w-72 bg-transparent outline-none text-sm"
+              placeholder="Buscar producto"
+              className=" w-20 md:w-72 bg-transparent outline-none text-sm p2"
             />
             <AiOutlineSearch />
           </div>
         </div>
 
         <div className="flex items-center">
-          <div className="bg-gray-200 flex items-center justify-center p-2 rounded-md gap-2 text-sm ml-7 md:mr-7">
-            <span>15 coins</span>
+          <div className="bg-[#EFF5FE] flex items-center justify-center p-2 gap-2 text-sm ml-7 md:mr-7">
+            <span><b>15</b> coins</span>
             <AiOutlineDollar className="text-lg" />
           </div>
           <div className="hidden lg:block ">

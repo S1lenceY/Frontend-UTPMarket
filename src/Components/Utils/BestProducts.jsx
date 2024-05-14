@@ -49,17 +49,17 @@ const BestProducts = () => {
           {data.map((d) => (
             <div className="bg-white text-black rounded-md w-72 mr-5">
               <img src={d.img} className="rounded-t-md w-full h-32" />
-              <div className=" bg-yellow-200 w-full h-3"></div>
+              <div className=" bg-[#F9CA29] w-full h-3"></div>
               <div className="flex mt-2 justify-between px-5 items-center">
                 <div className="flex flex-col">
                   <span className="font-bold">{d.name}</span>
                   <span className="text-sm">{d.id_category}</span>
                 </div>
                 <div className="flex gap-3">
-                  <span className="bg-slate-300 p-1.5 text-sm">
+                  <span className="bg-[#EFF5FE] p-1.5 text-sm text-[#434A5D]">
                     S/ {d.price}
                   </span>
-                  <span className="text-sm bg-slate-300 p-1.5 flex items-center gap-1">
+                  <span className="text-sm bg-[#EFF5FE] p-1.5 flex items-center gap-1 text-[#434A5D]">
                     {d.coin}
                     <AiOutlineDollar />
                   </span>
@@ -68,9 +68,10 @@ const BestProducts = () => {
               <div className="flex justify-between p-4">
                 <input
                   type="number"
-                  className="w-20 outline-none p-1.5 bg-slate-300 rounded-md "
+                  className="w-12 outline-none p-1.5 bg-[#EFF5FE] rounded-md "
+                  placeholder="0"
                 />
-                <button className="bg-[#292929] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition">
+                <button className="bg-[#000F37] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition">
                   Agregar al carrito
                 </button>
               </div>
