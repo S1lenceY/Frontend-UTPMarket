@@ -15,5 +15,16 @@
       "password": "",
       "id": 3
     }
+  ],
+
+  "detallecompra": [
+    {
+      "id_comprobante": 1,
+      "id_producto": 1,
+      "cantidad": 1.5,
+      "precio": 1.5,
+      "estado_entrega": false,
+      "estado_pago": false
+    }
   ]
 }
