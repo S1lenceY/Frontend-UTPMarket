@@ -8,28 +8,28 @@ const Canjear = () => {
     {
       name: "Pan Blanco",
       img: "/src/Assets/PanBlanco.jpg",
-      category: "Panaderia",
+      id_category: "Panaderia",
       price: 15,
       coin: 2,
     },
     {
       name: "Pan Blanco",
       img: "/src/Assets/PanBlanco.jpg",
-      category: "Panaderia",
+      id_category: "Panaderia",
       price: 15,
       coin: 3,
     },
     {
       name: "Pan Blanco",
       img: "/src/Assets/PanBlanco.jpg",
-      category: "Panaderia",
+      id_category: "Panaderia",
       price: 15,
       coin: 4,
     },
     {
       name: "Pan Blanco",
       img: "/src/Assets/PanBlanco.jpg",
-      category: "Panaderia",
+      id_category: "Panaderia",
       price: 15,
       coin: 5,
     },
@@ -50,7 +50,7 @@ const Canjear = () => {
               <div className="flex mt-2 justify-between px-5 items-center">
                 <div className="flex flex-col">
                   <span className="font-bold">{d.name}</span>
-                  <span className="text-sm">{d.category}</span>
+                  <span className="text-sm">{d.id_category}</span>
                 </div>
                 <div className="flex gap-3">
                   <span className="text-sm bg-slate-300 p-1.5 flex items-center gap-1">
