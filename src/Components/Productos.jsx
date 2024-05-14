@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiOutlineDollar } from "react-icons/ai";
 
 const Productos = () => {
 
   //Añadir precio total al carrito:
-  const [totalPrice, setTotalPrice] = React.useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  // Obtener datos del localStorage al cargar la página
+  useEffect(() => {
+    const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    setCartItems(storedCartItems);
+    updateTotalPrice(storedCartItems);
+  }, []);
 
   //Logica para añadir los datos del carrito al local storage
   const [cartItems, setCartItems] = useState([]);
@@ -36,6 +43,7 @@ const Productos = () => {
   const updateTotalPrice = (cart) => {
     const total = cart.reduce((acc, item) => acc + item.cantidad * item.precio, 0);
     setTotalPrice(total);
+    localStorage.setItem("totalPrice", total);
   };
 
 
