@@ -23,8 +23,6 @@ const Login = () => {
 
   const passwordType = showPassword ? "text" : "password";
 
-  const fixedToken = "123"
-
   //Login Prueba:
   const { login } = useAuthContext();
 
@@ -45,17 +43,16 @@ const Login = () => {
 
     try {
       // Enviar los datos al backend para autenticación
-      const response = await axios.post("http://localhost:3000/login", {
+      const response = await axios.post("http://localhost:8080/utp-market-api/login", {
         nombre: formData.nombre,
         password: formData.password,
       });
 
       // Extraer el token de la respuesta del backend
-      const token = response.data.token;
-      console.log(token);
+      const token = response.data.jwTtoken;
 
       // Llamar a la función login y pasar el token
-      login(fixedToken);
+      login(token);
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
       // Establecer el estado del error
