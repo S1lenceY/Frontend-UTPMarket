@@ -43,7 +43,7 @@ const Login = () => {
 
     try {
       // Enviar los datos al backend para autenticación
-      const response = await axios.post("http://localhost:8080/utp-market-api/login", {
+      const response = await axios.post("http://localhost:3000/login", {
         nombre: formData.nombre,
         password: formData.password,
       });
