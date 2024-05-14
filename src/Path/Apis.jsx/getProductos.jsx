@@ -4,7 +4,8 @@ export default async function getProducts() {
     return json;
   }
 
-export default async function getRecommendedProducts() {
+  {/* 
+//export default async function getRecommendedProducts() {
     const response = await fetch('https://http://apiutpmarket-production.up.railway.app/productos/');
     const json = await response.json();
     return json;
@@ -54,3 +55,4 @@ const detallesCompra = [
 ];
 
 await enviarDetallesCompra(comprobanteId, detallesCompra);
+*/}
