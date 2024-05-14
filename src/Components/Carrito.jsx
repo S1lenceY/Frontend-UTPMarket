@@ -18,6 +18,27 @@ const Carrito = () => {
       price: 15,
       count: 2,
     },
+    {
+      name: "Pan Blanco",
+      img: "/src/Assets/PanBlanco.jpg",
+      category: "Panaderia",
+      price: 15,
+      count: 2,
+    },
+    {
+      name: "Pan Blanco",
+      img: "/src/Assets/PanBlanco.jpg",
+      category: "Panaderia",
+      price: 15,
+      count: 2,
+    },
+    {
+      name: "Pan Blanco",
+      img: "/src/Assets/PanBlanco.jpg",
+      category: "Panaderia",
+      price: 15,
+      count: 2,
+    }
   ];
 
   return (
@@ -28,9 +49,10 @@ const Carrito = () => {
         </div>
         <div className="flex">
           <div className="flex gap-10 mt-4">
-            <div className="flex flex-col gap-5">
+            <div className=" flex-col gap-5 max-h-[600px] overflow-y-auto scroll hidden md:flex">
               {data.map((d) => (
-                <div className="bg-white text-black rounded-md w-fit flex">
+                <div className="bg-white text-black rounded-md w-fit flex mr-3">
+
                   <div className="flex">
                     <img src={d.img} className="rounded-s-md w-64 h-32 " />
                     <div className=" bg-yellow-200 h-full w-2"></div>
@@ -41,7 +63,7 @@ const Carrito = () => {
                       <span className="font-bold">{d.name}</span>
                       <span className="text-sm">Producto de {d.category}</span>
                     </div>
-                    <div className="flex gap-3 ml-48">
+                    <div className="flex gap-3 ml-40">
                       <span className="text-sm bg-slate-300 p-1.5 flex items-center gap-1">
                         {d.count} unidades
                       </span>
@@ -50,28 +72,35 @@ const Carrito = () => {
                       </span>
                     </div>
                   </div>
+                  
                 </div>
               ))}
             </div>
             <div className="flex flex-col">
-              <div className="bg-white p-4 ">
-                <div>
-                  <span className="text-xl font-bold border-b border-b-black">
+              <div className="bg-white px-10 py-7 ">
+                <div className="border-b border-b-black">
+                  <span className="text-xl font-bold ">
                     Datos Generales
                   </span>
                 </div>
-                <div className="flex flex-col text-sm py-4 border-b border-b-black">
+                <div className="flex flex-col text-sm py-3 border-b border-b-black">
                   <span><b>Subtotal: </b>S/100.00</span>
                   <span><b>IGV 18%: </b>S/18.00</span>
                 </div>
-                <div className="flex flex-col text-sm py-4 border-b border-b-black">
+                <div className="flex flex-col text-sm py-3 border-b border-b-black">
                   <span><b>Coins Ganadas: </b>12</span>
                   <span><b>Lugar de Recepción: </b>UTP Sede Chiclayo</span>
                 </div>
-                <div className="flex flex-col text-sm py-4 border-b border-b-black">
+                <div className="flex flex-col text-sm py-3 border-b border-b-black">
                   <span><b>Total a pagar: </b>S/112.00</span>
                 </div>
               </div>
+
+              <div className="flex mt-3">
+                <input type="text" placeholder="UTP-CIX-24" className="py-2 md:p-2 px-3 outline-none border"/>
+                <div className="flex items-center px-2 md:p-2 md:px-4 bg-slate-300 text-slate-500 font-bold border">Canjear cupón</div>
+              </div>
+              <button className="w-full bg-[#000f37] text-white mt-3 p-2 rounded font-bold text-sm">PROCESAR COMPRA</button>
             </div>
           </div>
         </div>
