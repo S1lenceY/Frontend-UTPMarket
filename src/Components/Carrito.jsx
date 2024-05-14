@@ -32,35 +32,35 @@ const Carrito = () => {
     {
       name: "Pan Blanco",
       img: "/src/Assets/PanBlanco.jpg",
-      category: "Panaderia",
+      id_category: "Panaderia",
       price: 15,
       count: 2,
     },
     {
       name: "Pan Blanco",
       img: "/src/Assets/PanBlanco.jpg",
-      category: "Panaderia",
+      id_category: "Panaderia",
       price: 15,
       count: 2,
     },
     {
       name: "Pan Blanco",
       img: "/src/Assets/PanBlanco.jpg",
-      category: "Panaderia",
+      id_category: "Panaderia",
       price: 15,
       count: 2,
     },
     {
       name: "Pan Blanco",
       img: "/src/Assets/PanBlanco.jpg",
-      category: "Panaderia",
+      id_category: "Panaderia",
       price: 15,
       count: 2,
     },
     {
       name: "Pan Blanco",
       img: "/src/Assets/PanBlanco.jpg",
-      category: "Panaderia",
+      id_category: "Panaderia",
       price: 15,
       count: 2,
     },
@@ -85,7 +85,7 @@ const Carrito = () => {
                   <div className="flex flex-col mt-2 justify-between p-3 px-5">
                     <div className="flex flex-col">
                       <span className="font-bold">{d.name}</span>
-                      <span className="text-sm">Producto de {d.category}</span>
+                      <span className="text-sm">Producto de {d.id_category}</span>
                     </div>
                     <div className="flex gap-3 ml-40">
                       <span className="text-sm bg-slate-300 p-1.5 flex items-center gap-1">
