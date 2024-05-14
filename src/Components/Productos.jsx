@@ -38,7 +38,7 @@ const Productos = () => {
   return (
     <>
       <div className="flex flex-col">
-        <div className="bg-white p-3 text-lg md:p-3 md:text-2xl gap-2 flex">
+        <div className="bg-white p-3 text-lg md:p-3 md:text-2xl gap-2 flex font-bold">
           <span>|</span> Panadería
         </div>
 
