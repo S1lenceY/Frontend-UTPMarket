@@ -2,23 +2,8 @@
   "login": [
     {
       "id": 1,
-      "username": "David",
+      "nombre": "David",
       "password": "1234"
-    },
-    {
-      "username": "",
-      "password": "",
-      "id": 2
-    },
-    {
-      "username": "",
-      "password": "",
-      "id": 3
-    },
-    {
-      "username": "",
-      "password": "",
-      "id": 4
     }
   ]
 }

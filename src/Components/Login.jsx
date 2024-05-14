@@ -29,7 +29,7 @@ const Login = () => {
   const { login } = useAuthContext();
 
   const [formData, setFormData] = useState({
-    username: "",
+    nombre: "",
     password: "",
   });
 
@@ -46,7 +46,7 @@ const Login = () => {
     try {
       // Enviar los datos al backend para autenticación
       const response = await axios.post("http://localhost:3000/login", {
-        username: formData.username,
+        nombre: formData.nombre,
         password: formData.password,
       });
 
@@ -97,8 +97,8 @@ const Login = () => {
                   type="text"
                   placeholder="Código o correo UTP"
                   className="p-2 text-sm text-titlecolor bg-inputbackground rounded w-full border border-bordercolor focus:outline-none focus:border-hoverbordercolor hover:border-hoverbordercolor peer"
-                  name="username" //Añadido para manejar con AXIOS
-                  value={formData.username}
+                  name="nombre" //Añadido para manejar con AXIOS
+                  value={formData.nombre}
                   onChange={handleChange}
                 />
                 <HiOutlineMail className="absolute right-2 top-1.5 text-2xl text-bordercolor peer-hover:text-hoverbordercolor peer-focus:text-hoverbordercolor" />

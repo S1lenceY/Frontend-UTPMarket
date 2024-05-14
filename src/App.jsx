@@ -11,6 +11,7 @@ import Inicio from "./Components/Inicio";
 import Productos from "./Components/Productos";
 import Canjear from "./Components/Canjear";
 import Carrito from "./Components/Carrito";
+import getProducts from "./Path/Apis.jsx/getProductos";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: INICIO,
+            loader: getProducts,
             element: <Inicio />,
           },
           {

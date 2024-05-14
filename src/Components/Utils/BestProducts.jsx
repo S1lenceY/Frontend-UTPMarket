@@ -1,8 +1,15 @@
 import React from "react";
 import Slider from "react-slick";
 import { AiOutlineDollar, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import {useLoaderData} from "react-router-dom";
+
 
 const BestProducts = () => {
+
+  //Importamos el JSON obtenido de la API aquí, para usarlo simplemente cambiar por bestProducts.map
+  const bestProducts = useLoaderData();
+  console.log(bestProducts);
+
   //Cambiar esto por la recepción de datos que me den en el API
   const data = [
     {

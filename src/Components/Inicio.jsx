@@ -2,8 +2,8 @@ import React from "react";
 import SwipeCarousel from "./Utils/SwipeCarousel";
 import BestProducts from "./Utils/BestProducts";
 
-
 const Inicio = () => {
+  
   return (
     <>
       <div className="flex flex-col">
