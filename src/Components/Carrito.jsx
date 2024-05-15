@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
 
 const Carrito = () => {
   //Para obtener productos:
@@ -9,6 +10,8 @@ const Carrito = () => {
     const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     setProductos(storedCartItems);
   }, []);
+
+  console.log(productos);
 
   //Para abrir modal
   const [showModal, setShowModal] = useState(false);
@@ -46,7 +49,69 @@ const Carrito = () => {
 
   // Calcular el Total a Pagar
   const totalPagar = totalPrice + iva;
-  
+
+  //Haciendo POST:
+  // Generar un id de usuario aleatorio (CORREGIR POR EL ID DE USUARIO VERDADERO)
+  const userId = Math.floor(Math.random() * 1000) + 1;
+
+  // Obtener la fecha actual en formato YYYY-MM-DD
+  const currentDate = new Date().toISOString().split("T")[0];
+
+  //Estableciendo variable para almacenar la respuesta del Backend:
+  const [respuestaBackend, setRespuestaBackend] = useState(null);
+
+  // Manejar el envío del comprobante
+  const handleEnviarComprobante = async () => {
+    try {
+      const response = await axios.post("http://localhost:3000/comprobante", {
+        fecha: currentDate,
+        total: totalPagar,
+        id_usuario: userId,
+      });
+      console.log("Comprobante enviado con éxito:", response.data);
+
+      // Almacenar la respuesta del backend en el estado
+      setRespuestaBackend(response.data);
+    } catch (error) {
+      console.error("Error al enviar el comprobante:", error);
+      // Aquí puedes manejar los errores de la solicitud, como mostrar un mensaje de error al usuario
+    }
+  };
+
+  //Post Final
+  // Post de detalle de compra por cada producto
+  const enviarDetalleCompra = async (producto) => {
+    try {
+      // Construir el objeto de datos para enviar al backend
+      const datos = {
+        id_comprobante: respuestaBackend.id, // Usar el ID del comprobante del backend
+        id_producto: producto.id_producto,
+        cantidad: producto.cantidad,
+        precio: producto.precio,
+        estado_entrega: true,
+        estado_pago: false,
+      };
+
+      // Hacer la solicitud POST
+      const response = await axios.post(
+        "http://localhost:3000/detallecompra",
+        datos
+      );
+      console.log("Detalle de compra enviado con éxito:", response.data);
+    } catch (error) {
+      console.error("Error al enviar el detalle de compra:", error);
+      // Aquí puedes manejar los errores de la solicitud, como mostrar un mensaje de error al usuario
+    }
+  };
+
+  // Manejar el envío de todos los detalles de compra(ITERACIÓN DE CADA PRODUCTO)
+  const handleEnviarDetalleCompra = async () => {
+    // Iterar sobre cada producto y enviar el detalle de compra
+    for (const producto of productos) {
+      await enviarDetalleCompra(producto);
+    }
+  };
+
   return (
     <>
       <div className="flex flex-col">
@@ -102,7 +167,8 @@ const Carrito = () => {
                 </div>
                 <div className="flex flex-col text-sm py-3 border-b border-b-black">
                   <span>
-                    <b>Coins Ganadas: </b>{totalCoins}
+                    <b>Coins Ganadas: </b>
+                    {totalCoins}
                   </span>
                   <span>
                     <b>Lugar de Recepción: </b>UTP Sede Chiclayo
@@ -127,7 +193,10 @@ const Carrito = () => {
               </div>
               <button
                 className="w-full bg-[#000f37] text-white mt-3 p-2 rounded font-bold text-sm"
-                onClick={handleButtonClick}
+                onClick={() => {
+                  handleButtonClick();
+                  handleEnviarComprobante();
+                }}
               >
                 PROCESAR COMPRA
               </button>
@@ -180,7 +249,7 @@ const Carrito = () => {
                             <span className="text-sm">{p.category}</span>
                           </div>
                           <div className="self-end">
-                            <button className=" p-1 px-3 rounded text-white text-sm bg-[#000f37] ">
+                            <button className=" p-1 px-3 rounded text-white text-sm bg-[#000f37] " onClick={handleEnviarDetalleCompra}>
                               Elegir
                             </button>
                           </div>
@@ -204,6 +273,8 @@ const Carrito = () => {
                         </div>
                         <div className="self-end">
                           <button className=" p-1 px-3 rounded text-white text-sm bg-[#000f37] ">
+                            {" "}
+                            {/*Al hacer click aquí se debe hacer el post de detallecompra*/}
                             Elegir
                           </button>
                         </div>

@@ -6,15 +6,23 @@
       "password": "1234"
     }
   ],
-
   "detallecompra": [
     {
+      "id": 1,
       "id_comprobante": 1,
       "id_producto": 1,
       "cantidad": 1.5,
       "precio": 1.5,
       "estado_entrega": false,
       "estado_pago": false
+    }
+  ],
+  "comprobante": [
+    {
+      "id": 1,
+      "fecha": "2024-05-14",
+      "total": 32.5,
+      "id_usuario": 4
     }
   ]
 }
