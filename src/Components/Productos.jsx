@@ -28,7 +28,7 @@ const Productos = () => {
 
     const newItem = {
       id_comprobante: "", // Cambiar esto por el ID real
-      id_producto: product.id_producto,
+      id_producto: product.id,
       nombre: product.name,
       id_category: product.id_category,
       cantidad: quantity,

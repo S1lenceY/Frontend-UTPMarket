@@ -54,7 +54,7 @@ const Carrito = () => {
   //Haciendo POST:
   // Generar un id de usuario aleatorio (CORREGIR POR EL ID DE USUARIO VERDADERO)
   const userId = localStorage.getItem('userID');
-  
+
   // Obtener la fecha actual en formato YYYY-MM-DD
   const currentDate = new Date().toISOString().split("T")[0];
 
