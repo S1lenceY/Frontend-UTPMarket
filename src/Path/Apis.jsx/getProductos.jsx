@@ -1,8 +1,43 @@
-export default async function getProducts() {
-    const response = await fetch('https://jsonplaceholder.typicode.com/users');
-    const json = await response.json();
+export default async function getProducts() {  
+  try {
+
+    const jwtToken = localStorage.getItem('jwtToken');
+
+    const response = await fetch('http://localhost:8080/utp-market-api/productos', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${jwtToken}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const jsonResponse = await response.json(); // Parse the JSON response
+    if (!Array.isArray(jsonResponse)) {
+      throw new Error('Response is not an array');
+    }
+
+    const json = jsonResponse.map(item => {
+      return {
+        id_producto: item.id,
+        name: item.name,
+        img: '', 
+        id_category: item.id_category, 
+        price: item.price,
+        coin: item.coin
+      };
+    });
+
     return json;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    throw error;
   }
+}
+
 
   {/* 
 //export default async function getRecommendedProducts() {

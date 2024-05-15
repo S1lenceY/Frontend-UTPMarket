@@ -6,6 +6,8 @@ import { HiOutlineEye, HiOutlineEyeOff, HiOutlineMail } from "react-icons/hi";
 import { useAuthContext } from "../Auth/authContext";
 import axios from "axios";
 import useThemeStorage from "./Utils/useThemeStorage";
+import { jwtDecode } from "jwt-decode";
+import getUsers from "../Path/Apis.jsx/getUsers";
 
 const Login = () => {
   //Ejecutamos tema:
@@ -43,13 +45,27 @@ const Login = () => {
 
     try {
       // Enviar los datos al backend para autenticación
-      const response = await axios.post("http://localhost:3000/login", {
+      const response = await axios.post("http://localhost:8080/utp-market-api/login", {
         nombre: formData.nombre,
         password: formData.password,
       });
 
       // Extraer el token de la respuesta del backend
       const token = response.data.jwTtoken;
+      
+      // Guardar el token en el localStorage
+      localStorage.setItem('jwtToken', token);
+
+      //npm install jwt-decode
+      const decodedToken = jwtDecode(token);
+      //Aquí ya tienes la id del usuario que querias.
+      const id_usuario = decodedToken.id
+
+      // Si queremos la información de este usuario
+      getUsers(token).then(usersData => {
+        const user = usersData.find(user => user.usuarioID === id_usuario);
+        localStorage.setItem('user', user);
+      })
 
       // Llamar a la función login y pasar el token
       login(token);
