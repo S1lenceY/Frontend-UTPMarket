@@ -3,7 +3,7 @@ import { motion, useAnimation } from "framer-motion";
 
 const imgs = [
   "/src/Assets/Slide1.png",
-  "/src/Assets/Slide2.jpg",
+  "/src/Assets/Slide2.png",
   "/src/Assets/Slide3.png",
 ];
 

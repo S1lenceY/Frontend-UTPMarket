@@ -4,6 +4,16 @@
       "id": 1,
       "nombre": "David",
       "password": "1234"
+    },
+    {
+      "nombre": "jhomt",
+      "password": "jhomt",
+      "id": 2
+    },
+    {
+      "nombre": "jhomt",
+      "password": "jhomt",
+      "id": 3
     }
   ],
   "detallecompra": [
