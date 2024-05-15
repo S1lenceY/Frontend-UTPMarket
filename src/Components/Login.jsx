@@ -7,7 +7,9 @@ import { useAuthContext } from "../Auth/authContext";
 import axios from "axios";
 import useThemeStorage from "./Utils/useThemeStorage";
 import { jwtDecode } from "jwt-decode";
+import AxiosHeader from "../Auth/AxiosHeader";
 import getUsers from "../Path/Apis.jsx/getUsers";
+
 
 const Login = () => {
   //Ejecutamos tema:
@@ -69,6 +71,8 @@ const Login = () => {
 
       // Llamar a la función login y pasar el token
       login(token);
+      AxiosHeader();
+      
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
       // Establecer el estado del error

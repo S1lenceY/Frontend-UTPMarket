@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiOutlineDollar } from "react-icons/ai";
+import { useLoaderData } from "react-router-dom";
 
 const Productos = () => {
-
   //Añadir precio total al carrito:
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -20,8 +20,8 @@ const Productos = () => {
   //Logica para añadir los datos del carrito al local storage
   const [cartItems, setCartItems] = useState([]);
 
-   // Manejar clic en "Agregar al carrito"
-   const handleAddToCart = (product) => {
+  // Manejar clic en "Agregar al carrito"
+  const handleAddToCart = (product) => {
     const quantity = parseFloat(
       document.getElementById(`quantity_${product.id_producto}`).value
     );
@@ -49,37 +49,26 @@ const Productos = () => {
 
   // Actualizar el precio total
   const updateTotalPrice = (cart) => {
-    const total = cart.reduce((acc, item) => acc + item.cantidad * item.precio, 0);
+    const total = cart.reduce(
+      (acc, item) => acc + item.cantidad * item.precio,
+      0
+    );
     setTotalPrice(total);
     localStorage.setItem("totalPrice", total);
   };
 
   // Actualizar los coins totales
   const updateTotalCoins = (cart) => {
-    const coins = cart.reduce((acc, item) => acc + item.cantidad * item.coin, 0);
+    const coins = cart.reduce(
+      (acc, item) => acc + item.cantidad * item.coin,
+      0
+    );
     setTotalCoins(coins);
     localStorage.setItem("totalCoins", coins);
   };
 
   //Cambiar esto por la recepción de datos que me den en el API
-  const data = [
-    {
-      id_producto: 1,
-      name: "Pan Blanco",
-      img: "/src/Assets/PanBlanco.jpg",
-      id_category: "Panaderia",
-      price: 1.5,
-      coin: 1.0,
-    },
-    {
-      id_producto: 4,
-      name: "Vodka",
-      img: "/src/Assets/PanBlanco.jpg",
-      id_category: "Licores",
-      price: 2.0,
-      coin: 1.0,
-    }
-  ];
+  const data = useLoaderData();
 
   // Agrupar productos por categoría
   const groupedProducts = data.reduce((acc, curr) => {
@@ -100,7 +89,7 @@ const Productos = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4 gap-8">
             {products.map((product, index) => (
               <div key={index} className="bg-white text-black rounded-md w-72">
-                <img src={product.img} className="rounded-t-md w-full h-32" />
+                <img src="/src/Assets/PanBlanco.jpg" className="rounded-t-md w-full h-32" />
                 <div className=" bg-yellow-200 w-full h-3"></div>
                 <div className="flex mt-2 justify-between px-5 items-center">
                   <div className="flex flex-col">
@@ -117,13 +106,16 @@ const Productos = () => {
                     </span>
                   </div>
                 </div>
-                <div className="flex justify-between p-4"> 
+                <div className="flex justify-between p-4">
                   <input
                     type="number"
                     id={`quantity_${product.id_producto}`}
                     className="w-20 outline-none p-1.5 bg-slate-300 rounded-md "
                   />
-                  <button className="bg-[#292929] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition" onClick={() => handleAddToCart(product)}>
+                  <button
+                    className="bg-[#292929] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition"
+                    onClick={() => handleAddToCart(product)}
+                  >
                     Agregar al carrito
                   </button>
                 </div>
@@ -139,6 +131,6 @@ const Productos = () => {
       </div>
     </>
   );
-}; 
+};
 
 export default Productos;

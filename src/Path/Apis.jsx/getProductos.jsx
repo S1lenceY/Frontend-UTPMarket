@@ -1,39 +1,13 @@
-export default async function getProducts() {  
+import axios from 'axios';
+import AxiosHeader from "../../Auth/AxiosHeader";
+
+export default async function getProductos() {
+  AxiosHeader();
   try {
-
-    const jwtToken = localStorage.getItem('jwtToken');
-
-    const response = await fetch('http://localhost:8080/utp-market-api/productos', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${jwtToken}`,
-        'Content-Type': 'application/json'
-      }
-    });
-    
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-
-    const jsonResponse = await response.json(); // Parse the JSON response
-    if (!Array.isArray(jsonResponse)) {
-      throw new Error('Response is not an array');
-    }
-
-    const json = jsonResponse.map(item => {
-      return {
-        id_producto: item.id,
-        name: item.name,
-        img: '', 
-        id_category: item.id_category, 
-        price: item.price,
-        coin: item.coin
-      };
-    });
-
-    return json;
+    const response = await axios.get('http://localhost:8080/utp-market-api/productos');
+    return response.data;
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error('Error al obtener productos:', error);
     throw error;
   }
 }
