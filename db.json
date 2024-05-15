@@ -25,6 +25,70 @@
       "precio": 1.5,
       "estado_entrega": false,
       "estado_pago": false
+    },
+    {
+      "id_comprobante": 2,
+      "cantidad": 1,
+      "precio": 1.5,
+      "estado_entrega": true,
+      "estado_pago": false,
+      "id": 2
+    },
+    {
+      "id_comprobante": 2,
+      "cantidad": 1,
+      "precio": 2.5,
+      "estado_entrega": true,
+      "estado_pago": false,
+      "id": 3
+    },
+    {
+      "id_comprobante": 2,
+      "cantidad": 1,
+      "precio": 3,
+      "estado_entrega": true,
+      "estado_pago": false,
+      "id": 4
+    },
+    {
+      "id_comprobante": 2,
+      "cantidad": 1,
+      "precio": 2,
+      "estado_entrega": true,
+      "estado_pago": false,
+      "id": 5
+    },
+    {
+      "id_comprobante": 2,
+      "cantidad": 1,
+      "precio": 1.5,
+      "estado_entrega": true,
+      "estado_pago": false,
+      "id": 6
+    },
+    {
+      "id_comprobante": 2,
+      "cantidad": 1,
+      "precio": 2.5,
+      "estado_entrega": true,
+      "estado_pago": false,
+      "id": 7
+    },
+    {
+      "id_comprobante": 2,
+      "cantidad": 1,
+      "precio": 3,
+      "estado_entrega": true,
+      "estado_pago": false,
+      "id": 8
+    },
+    {
+      "id_comprobante": 2,
+      "cantidad": 1,
+      "precio": 2,
+      "estado_entrega": true,
+      "estado_pago": false,
+      "id": 9
     }
   ],
   "comprobante": [
@@ -33,6 +97,12 @@
       "fecha": "2024-05-14",
       "total": 32.5,
       "id_usuario": 4
+    },
+    {
+      "fecha": "2024-05-15",
+      "total": 10.62,
+      "id_usuario": 175,
+      "id": 2
     }
   ]
 }

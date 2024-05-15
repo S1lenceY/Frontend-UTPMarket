@@ -66,7 +66,10 @@ const Login = () => {
       // Si queremos la información de este usuario
       getUsers(token).then(usersData => {
         const user = usersData.find(user => user.usuarioID === id_usuario);
-        localStorage.setItem('user', user);
+        localStorage.setItem('userID', user.usuarioID);
+        localStorage.setItem('usuario', user.usuario);
+        localStorage.setItem('coins', user.coins);
+        localStorage.setItem('rol', user.rol);
       })
 
       // Llamar a la función login y pasar el token

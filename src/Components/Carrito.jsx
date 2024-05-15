@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
+import AxiosHeader from "../Auth/AxiosHeader";
 
 const Carrito = () => {
   //Para obtener productos:
@@ -52,8 +53,8 @@ const Carrito = () => {
 
   //Haciendo POST:
   // Generar un id de usuario aleatorio (CORREGIR POR EL ID DE USUARIO VERDADERO)
-  const userId = Math.floor(Math.random() * 1000) + 1;
-
+  const userId = localStorage.getItem('userID');
+  
   // Obtener la fecha actual en formato YYYY-MM-DD
   const currentDate = new Date().toISOString().split("T")[0];
 
@@ -62,8 +63,9 @@ const Carrito = () => {
 
   // Manejar el envío del comprobante
   const handleEnviarComprobante = async () => {
+    AxiosHeader();
     try {
-      const response = await axios.post("http://localhost:3000/comprobante", {
+      const response = await axios.post("http://localhost:8080/utp-market-api/comprobante", {
         fecha: currentDate,
         total: totalPagar,
         id_usuario: userId,
@@ -81,6 +83,7 @@ const Carrito = () => {
   //Post Final
   // Post de detalle de compra por cada producto
   const enviarDetalleCompra = async (producto) => {
+    AxiosHeader();
     try {
       // Construir el objeto de datos para enviar al backend
       const datos = {
@@ -94,7 +97,7 @@ const Carrito = () => {
 
       // Hacer la solicitud POST
       const response = await axios.post(
-        "http://localhost:3000/detallecompra",
+        "http://localhost:8080/utp-market-api/detallecompra",
         datos
       );
       console.log("Detalle de compra enviado con éxito:", response.data);
