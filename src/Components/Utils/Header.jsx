@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { LOGOUT } from "../../Path/Paths";
 import { Link, useLoaderData } from "react-router-dom";
 import LogoUTP from "../../Assets/LogoUTP.png";
@@ -6,6 +6,7 @@ import { IoIosMenu, IoIosArrowDown } from "react-icons/io";
 import { AiOutlineSearch, AiOutlineDollar } from "react-icons/ai";
 
 const Header = ({ handleMenuClick }) => {
+
   return (
     <>
       <div className="fixed flex md:absolute md:h-20 h-14 w-screen bg-inputbackground items-center justify-between z-10">
@@ -13,7 +14,7 @@ const Header = ({ handleMenuClick }) => {
           className="absolute cursor-pointer top-0 left-0 bg-[#000f37] w-14 h-14 flex items-center justify-center text-white text-2xl"
           onClick={handleMenuClick}
         >
-          <IoIosMenu /> 
+          <IoIosMenu />
         </div>
         <div className="flex items-center">
           <img
@@ -33,7 +34,9 @@ const Header = ({ handleMenuClick }) => {
 
         <div className="flex items-center">
           <div className="bg-[#EFF5FE] flex items-center justify-center p-2 gap-2 text-sm ml-7 md:mr-7">
-            <span><b>15</b> coins</span>
+            <span>
+              <b>12</b> coins
+            </span>
             <AiOutlineDollar className="text-lg" />
           </div>
           <div className="hidden lg:block ">
@@ -54,7 +57,6 @@ const Header = ({ handleMenuClick }) => {
             <IoIosArrowDown />
           </Link>
         </div>
-        
       </div>
     </>
   );

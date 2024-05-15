@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiOutlineDollar } from "react-icons/ai";
+import { ImHappy } from "react-icons/im";
 
 const Canjear = () => {
+
+  //Para abrir modal
+  const [showModal, setShowModal] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   //Cambiar esto por la recepción de datos que me den en el API
   const data = [
     {
@@ -64,7 +78,10 @@ const Canjear = () => {
                   type="number"
                   className="w-20 outline-none p-1.5 bg-slate-300 rounded-md "
                 />
-                <button className="bg-[#292929] border-2 border-[#3e3e3e] rounded-lg text-white px-7 py-1 text-xs hover:border-[#fff] cursor-pointer transition">
+                <button
+                  className="bg-[#292929] border-2 border-[#3e3e3e] rounded-lg text-white px-7 py-1 text-xs hover:border-[#fff] cursor-pointer transition"
+                  onClick={handleButtonClick}
+                >
                   Canjear
                 </button>
               </div>
@@ -76,6 +93,42 @@ const Canjear = () => {
       <div className="bg-[#000f37] p-4 rounded-full text-white flex items-center gap-2 text-sm font-bold fixed right-2 md:right-16">
         <MdOutlineShoppingCart className="text-lg" />
       </div>
+
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex justify-center items-center overflow-y-auto"
+            onClick={handleCloseModal}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div
+              className="flex w-fit h-fit bg-transparent text-white"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              <div className="w-fit flex transform overflow-hidden rounded bg-background p-5 text-left align-middle shadow-xl transition-all text-black">
+                <div className="flex flex-col items-center justify-center w-72">
+                  <span className="text-xl font-bold">¡Genial!</span>
+                  <p className="text-center mt-2 mb-3">
+                    Ahora puedes reclamar tu compra en cualquier cafetería de
+                    UTP+ market brindando tu código UTP.
+                  </p>
+                  <div className="text-4xl">
+                    <ImHappy />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

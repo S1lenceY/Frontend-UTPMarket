@@ -7,6 +7,9 @@ const Productos = () => {
   //Añadir precio total al carrito:
   const [totalPrice, setTotalPrice] = useState(0);
 
+  // Añadir coins totales al carrito:
+  const [totalCoins, setTotalCoins] = useState(0);
+
   // Obtener datos del localStorage al cargar la página
   useEffect(() => {
     const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -22,11 +25,15 @@ const Productos = () => {
     const quantity = parseFloat(
       document.getElementById(`quantity_${product.id_producto}`).value
     );
+
     const newItem = {
-      id_comprobante: Math.floor(Math.random() * 1000), // Cambiar esto por el ID real
+      id_comprobante: "", // Cambiar esto por el ID real
       id_producto: product.id_producto,
+      nombre: product.name,
+      id_category: product.id_category,
       cantidad: quantity,
       precio: product.price,
+      coin: product.coin,
       estado_entrega: false,
       estado_pago: false,
     };
@@ -35,6 +42,7 @@ const Productos = () => {
     localStorage.setItem("cartItems", JSON.stringify(updatedCart));
 
     updateTotalPrice(updatedCart);
+    updateTotalCoins(updatedCart);
   };
 
   console.log(cartItems);
@@ -46,6 +54,12 @@ const Productos = () => {
     localStorage.setItem("totalPrice", total);
   };
 
+  // Actualizar los coins totales
+  const updateTotalCoins = (cart) => {
+    const coins = cart.reduce((acc, item) => acc + item.cantidad * item.coin, 0);
+    setTotalCoins(coins);
+    localStorage.setItem("totalCoins", coins);
+  };
 
   //Cambiar esto por la recepción de datos que me den en el API
   const data = [

@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Carrito = () => {
+  //Para obtener productos:
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    setProductos(storedCartItems);
+  }, []);
+
   //Para abrir modal
   const [showModal, setShowModal] = useState(false);
 
@@ -27,45 +35,18 @@ const Carrito = () => {
     },
   ];
 
-  //Cambiar esto por la recepción de datos que me den en el API
-  const data = [
-    {
-      name: "Pan Blanco",
-      img: "/src/Assets/PanBlanco.jpg",
-      id_category: "Panaderia",
-      price: 15,
-      count: 2,
-    },
-    {
-      name: "Pan Blanco",
-      img: "/src/Assets/PanBlanco.jpg",
-      id_category: "Panaderia",
-      price: 15,
-      count: 2,
-    },
-    {
-      name: "Pan Blanco",
-      img: "/src/Assets/PanBlanco.jpg",
-      id_category: "Panaderia",
-      price: 15,
-      count: 2,
-    },
-    {
-      name: "Pan Blanco",
-      img: "/src/Assets/PanBlanco.jpg",
-      id_category: "Panaderia",
-      price: 15,
-      count: 2,
-    },
-    {
-      name: "Pan Blanco",
-      img: "/src/Assets/PanBlanco.jpg",
-      id_category: "Panaderia",
-      price: 15,
-      count: 2,
-    },
-  ];
+  // Obtener el precio total del localStorage
+  const totalPrice = parseFloat(localStorage.getItem("totalPrice")) || 0;
 
+  // Obtener las coins totales del localStorage
+  const totalCoins = parseFloat(localStorage.getItem("totalCoins")) || 0;
+
+  // Calcular el IGV
+  const iva = totalPrice * 0.18;
+
+  // Calcular el Total a Pagar
+  const totalPagar = totalPrice + iva;
+  
   return (
     <>
       <div className="flex flex-col">
@@ -75,24 +56,31 @@ const Carrito = () => {
         <div className="flex">
           <div className="flex gap-10 mt-4">
             <div className=" flex-col gap-5 max-h-[424px] overflow-y-auto scroll hidden md:flex">
-              {data.map((d) => (
-                <div className="bg-white text-black rounded-md w-fit flex mr-3">
+              {productos.map((producto, index) => (
+                <div
+                  key={index}
+                  className="bg-white text-black rounded-md w-fit flex mr-3"
+                >
                   <div className="flex">
-                    <img src={d.img} className="rounded-s-md w-64 h-32 " />
+                    <img
+                      src="/src/Assets/PanBlanco.jpg"
+                      className="rounded-s-md w-64 h-32 "
+                    />
                     <div className=" bg-yellow-200 h-full w-2"></div>
                   </div>
-
                   <div className="flex flex-col mt-2 justify-between p-3 px-5">
                     <div className="flex flex-col">
-                      <span className="font-bold">{d.name}</span>
-                      <span className="text-sm">Producto de {d.id_category}</span>
+                      <span className="font-bold">{producto.nombre}</span>
+                      <span className="text-sm">
+                        Producto de {producto.id_category}
+                      </span>
                     </div>
                     <div className="flex gap-3 ml-40">
                       <span className="text-sm bg-slate-300 p-1.5 flex items-center gap-1">
-                        {d.count} unidades
+                        {producto.cantidad} unidades
                       </span>
                       <span className="bg-[#000f37] text-white rounded-sm p-1.5 text-sm">
-                        S/ {d.price}
+                        S/ {producto.precio}
                       </span>
                     </div>
                   </div>
@@ -106,15 +94,15 @@ const Carrito = () => {
                 </div>
                 <div className="flex flex-col text-sm py-3 border-b border-b-black">
                   <span>
-                    <b>Subtotal: </b>S/100.00
+                    <b>Subtotal: </b>S/{totalPrice.toFixed(2)}
                   </span>
                   <span>
-                    <b>IGV 18%: </b>S/18.00
+                    <b>IGV 18%: </b>S/{iva.toFixed(2)}
                   </span>
                 </div>
                 <div className="flex flex-col text-sm py-3 border-b border-b-black">
                   <span>
-                    <b>Coins Ganadas: </b>12
+                    <b>Coins Ganadas: </b>{totalCoins}
                   </span>
                   <span>
                     <b>Lugar de Recepción: </b>UTP Sede Chiclayo
@@ -122,7 +110,7 @@ const Carrito = () => {
                 </div>
                 <div className="flex flex-col text-sm py-3 border-b border-b-black">
                   <span>
-                    <b>Total a pagar: </b>S/112.00
+                    <b>Total a pagar: </b>S/{totalPagar.toFixed(2)}
                   </span>
                 </div>
               </div>
@@ -221,7 +209,6 @@ const Carrito = () => {
                         </div>
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>

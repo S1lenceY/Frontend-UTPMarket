@@ -4,16 +4,6 @@
       "id": 1,
       "nombre": "David",
       "password": "1234"
-    },
-    {
-      "nombre": "",
-      "password": "",
-      "id": 2
-    },
-    {
-      "nombre": "",
-      "password": "",
-      "id": 3
     }
   ],
 
