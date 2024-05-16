@@ -4,13 +4,26 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiOutlineDollar } from "react-icons/ai";
 import { ImHappy } from "react-icons/im";
 import imagenes from "../Path/Imagenes";
+import { useCoins } from "../Auth/CoinsContext";
 
 const Canjear = () => {
+  const { totalCoins, updateTotalCoins } = useCoins();
+
   //Para abrir modal
   const [showModal, setShowModal] = useState(false);
 
-  const handleButtonClick = () => {
+  const handleCanjear = (coinsToSubtract) => {
+    // Lógica para restar las monedas canjeadas del total de monedas
+    const newTotalCoins = totalCoins - coinsToSubtract;
+    // Actualizar el total de monedas
+    updateTotalCoins(newTotalCoins);
+  };
+
+  const handleButtonClick = (coinsToSubtract) => {
+    // Lógica para abrir modal u otras operaciones necesarias
     setShowModal(true);
+    // Llamar a la función para restar las monedas
+    handleCanjear(coinsToSubtract);
   };
 
   const handleCloseModal = () => {
@@ -88,7 +101,9 @@ const Canjear = () => {
                   />
                   <button
                     className="bg-[#000F37] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition"
-                    onClick={handleButtonClick}
+                    onClick={() => {
+                      handleButtonClick(d.coin); // Pasar d.coin como argumento 
+                    }}
                   >
                     Canjear
                   </button>
