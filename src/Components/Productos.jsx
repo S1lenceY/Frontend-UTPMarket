@@ -2,9 +2,16 @@ import React, { useState, useEffect } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiOutlineDollar } from "react-icons/ai";
 import { useLoaderData } from "react-router-dom";
-import imagenes from "../Path/Imagenes"
+import imagenes from "../Path/Imagenes";
 
 const Productos = () => {
+  //Lógica del Button Validado
+  const [buttonEnabled, setButtonEnabled] = useState(false);
+
+  const handleInputFocus = () => {
+    setButtonEnabled(true);
+  };
+
   //Añadir precio total al carrito:
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -122,10 +129,15 @@ const Productos = () => {
                       type="number"
                       id={`quantity_${product.id_producto}`}
                       className="w-20 outline-none p-1.5 bg-slate-300 rounded-md "
+                      onFocus={handleInputFocus} // Habilita el botón cuando se hace clic en el input
+                      min={1} // Establece el valor mínimo como 1
                     />
                     <button
-                      className="bg-[#292929] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition"
+                      className={`bg-[#292929] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition ${
+                        !buttonEnabled ? "opacity-50 cursor-not-allowed" : ""
+                      }`}
                       onClick={() => handleAddToCart(product)}
+                      disabled={!buttonEnabled} // Deshabilita el botón si no está habilitado
                     >
                       Agregar al carrito
                     </button>
