@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiOutlineDollar } from "react-icons/ai";
 import { ImHappy } from "react-icons/im";
-import imagenes from "../../Path/Imagenes";
+import imagenes from "../Path/Imagenes";
 
 const Canjear = () => {
   //Para abrir modal

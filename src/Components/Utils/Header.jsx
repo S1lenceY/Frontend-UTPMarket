@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { LOGOUT } from "../../Path/Paths";
 import { Link, useLoaderData } from "react-router-dom";
 import LogoUTP from "../../Assets/LogoUTP.png";
+import User from "../../Assets/User.png";
 import { IoIosMenu, IoIosArrowDown } from "react-icons/io";
 import { AiOutlineSearch, AiOutlineDollar } from "react-icons/ai";
 
@@ -48,7 +49,7 @@ const Header = ({ handleMenuClick }) => {
                 <span className="text-xs self-end">Estudiante</span>
               </div>
               <img
-                src="/src/Assets/Logo.webp"
+                src={User}
                 className="rounded-full h-10 w-10"
               />
             </div>

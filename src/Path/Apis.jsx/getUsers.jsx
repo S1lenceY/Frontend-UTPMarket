@@ -1,5 +1,5 @@
 export default async function getUsers(jwtToken) {
-    const url = 'http://localhost:8080/utp-market-api/usuarios';
+    const url = 'https://apiutpmarket-production.up.railway.app/utp-market-api/usuarios';
     
     const headers = {
         'Authorization': `Bearer ${jwtToken}`,

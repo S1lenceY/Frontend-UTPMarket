@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import AxiosHeader from "../Auth/AxiosHeader";
+import VISA from "../Assets/VISA.jpg";
 import PayPal from "../Assets/PayPal.png";
 import Caja from "../Assets/Caja.jpg";
 import Logo from "../Assets/Logo.webp";
@@ -78,7 +79,7 @@ const Carrito = () => {
     AxiosHeader();
     try {
       const response = await axios.post(
-        "http://localhost:8080/utp-market-api/comprobante",
+        "https://apiutpmarket-production.up.railway.app/utp-market-api/comprobante",
         {
           fecha: currentDate,
           total: totalPagar,
@@ -112,7 +113,7 @@ const Carrito = () => {
 
       // Hacer la solicitud POST
       const response = await axios.post(
-        "http://localhost:8080/utp-market-api/detallecompra",
+        "https://apiutpmarket-production.up.railway.app/utp-market-api/detallecompra",
         datos
       );
       console.log("Detalle de compra enviado con éxito:", response.data);

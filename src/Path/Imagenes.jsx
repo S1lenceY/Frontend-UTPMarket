@@ -1,5 +1,9 @@
 const imagenes = [
   {
+    name: "Pan blanco",
+    url: "https://upload.wikimedia.org/wikipedia/commons/f/f3/White_bread_800.jpg",
+  },
+  {
     name: "Pan Blanco",
     url: "https://upload.wikimedia.org/wikipedia/commons/f/f3/White_bread_800.jpg",
   },
