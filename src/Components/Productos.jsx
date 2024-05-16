@@ -31,7 +31,7 @@ const Productos = () => {
   // Manejar clic en "Agregar al carrito"
   const handleAddToCart = (product) => {
     const quantity = parseFloat(
-      document.getElementById(`quantity_${product.id_producto}`).value
+      document.getElementById(`quantity_${product.id}`).value
     );
 
     const newItem = {
