@@ -3,10 +3,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ImHappy } from "react-icons/im";
 
 
-const PayModal = ({ showModalPay, setShowModalPay }) => {
+const PayModal = ({ showModalPay, setShowModalPay, setProductos  }) => {
 
   const handleCloseModalPay = () => {
     setShowModalPay(false);
+    setProductos([]); // Limpiar la lista de productos al cerrar el modal de pago
+    // Eliminar los elementos del local storage al cerrar el modal de pago
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("totalPrice");
+    localStorage.removeItem("totalCoins");
   };
 
   return (

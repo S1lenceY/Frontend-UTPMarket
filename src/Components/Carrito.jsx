@@ -36,7 +36,7 @@ const Carrito = () => {
 
   const handleButtonPayClick = () => {
     setShowModalPay(true);
-  };    
+  };
 
   //Definiendo los métodos de pago
   const pago = [
@@ -219,11 +219,14 @@ const Carrito = () => {
                 </div>
               </div>
               <button
-                className="w-full bg-[#000f37] text-white mt-3 p-2 rounded font-bold text-sm"
+                className={`w-full bg-[#000f37] text-white mt-3 p-2 rounded font-bold text-sm ${
+                  productos.length === 0 ? "cursor-not-allowed opacity-50" : ""
+                }`}
                 onClick={() => {
                   handleButtonClick();
                   handleEnviarComprobante();
                 }}
+                disabled={productos.length === 0} // Deshabilitar el botón si no hay productos en el carrito
               >
                 PROCESAR COMPRA
               </button>
@@ -278,7 +281,11 @@ const Carrito = () => {
                           <div className="self-end">
                             <button
                               className=" p-1 px-3 rounded text-white text-sm bg-[#000f37] "
-                              onClick={ ()=> { handleEnviarDetalleCompra(); handleButtonPayClick(); handleCloseModal(); }}
+                              onClick={() => {
+                                handleEnviarDetalleCompra();
+                                handleButtonPayClick();
+                                handleCloseModal();
+                              }}
                             >
                               Elegir
                             </button>
@@ -299,7 +306,13 @@ const Carrito = () => {
                           <span className="text-sm">Pago en Caja</span>
                         </div>
                         <div className="self-end">
-                          <button className=" p-1 px-3 rounded text-white text-sm bg-[#000f37] " onClick={()=> {handleButtonPayClick(); handleCloseModal();}}>
+                          <button
+                            className=" p-1 px-3 rounded text-white text-sm bg-[#000f37] "
+                            onClick={() => {
+                              handleButtonPayClick();
+                              handleCloseModal();
+                            }}
+                          >
                             Elegir
                           </button>
                         </div>
@@ -312,7 +325,7 @@ const Carrito = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <PayModal showModalPay={showModalPay} setShowModalPay={setShowModalPay}/>
+      <PayModal showModalPay={showModalPay} setShowModalPay={setShowModalPay} setProductos={setProductos}/>
     </>
   );
 };
