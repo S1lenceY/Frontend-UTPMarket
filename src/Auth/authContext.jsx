@@ -23,6 +23,21 @@ export default function AuthContextProvider({ children }) {
 
   const logout = useCallback(function () {
     window.localStorage.removeItem(MY_AUTH_APP);
+    // Recoger otros items del local storage al momento de logout
+    const itemsToRemove = [
+      "cartItems",
+      "coins",
+      "jwtToken",
+      "rol",
+      "selectedLink",
+      "totalCoins",
+      "totalPrice",
+      "userID",
+      "usuario",
+    ];
+    itemsToRemove.forEach((item) => {
+      window.localStorage.removeItem(item);
+    });
     setIsAuthenticated(false);
   }, []);
 

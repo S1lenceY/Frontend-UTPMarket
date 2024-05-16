@@ -5,6 +5,7 @@ import LogoUTP from "../../Assets/LogoUTP.png";
 import User from "../../Assets/User.png";
 import { IoIosMenu, IoIosArrowDown } from "react-icons/io";
 import { AiOutlineSearch, AiOutlineDollar } from "react-icons/ai";
+import Dropdown from "./Dropdown";
 
 const Header = ({ handleMenuClick }) => {
 
@@ -54,9 +55,8 @@ const Header = ({ handleMenuClick }) => {
               />
             </div>
           </div>
-          <Link to={LOGOUT} className="text-xl mx-2 md:mr-10">
-            <IoIosArrowDown />
-          </Link>
+          
+          <Dropdown />
         </div>
       </div>
     </>
