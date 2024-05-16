@@ -45,7 +45,7 @@ const Header = ({ handleMenuClick }) => {
             <div className=" pl-5 gap-4 items-center flex border-l-slate-500 border-l">
               <div className="flex flex-col">
                 <span className="text-sm">
-                  Hola, <b>Gabriel Paiva</b>
+                  Hola, <b>{localStorage.getItem('usuario')}</b>
                 </span>
                 <span className="text-xs self-end">Estudiante</span>
               </div>

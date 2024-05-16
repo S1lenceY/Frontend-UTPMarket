@@ -96,8 +96,9 @@ const Canjear = () => {
                 <div className="flex justify-between p-4">
                   <input
                     type="number"
-                    className="w-12 outline-none p-1.5 bg-[#EFF5FE] rounded-md "
+                    className="w-12 outline-none p-1.5 bg-[#EFF5FE] rounded-md"
                     placeholder="1"
+                    min={1}
                   />
                   <button
                     className="bg-[#000F37] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition"
