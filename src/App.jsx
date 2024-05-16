@@ -2,7 +2,17 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PrivateRoute from "./Auth/PrivateRoute";
 import PublicRoute from "./Auth/PublicRoute";
 import AuthContextProvider from "./Auth/authContext";
-import { LOGIN, LOGOUT, CHAT, ERROR, INICIO, MAIN, PRODUCTOS, CANJEAR, CARRITO } from "./Path/Paths";
+import {
+  LOGIN,
+  LOGOUT,
+  CHAT,
+  ERROR,
+  INICIO,
+  MAIN,
+  PRODUCTOS,
+  CANJEAR,
+  CARRITO,
+} from "./Path/Paths";
 import Chat from "./Components/Chat";
 import Login from "./Components/Login";
 import Logout from "./Components/Logout";
@@ -12,6 +22,7 @@ import Productos from "./Components/Productos";
 import Canjear from "./Components/Canjear";
 import Carrito from "./Components/Carrito";
 import getProducts from "./Path/Apis.jsx/getProductos";
+import { CoinsProvider } from "./Auth/CoinsContext";
 
 const router = createBrowserRouter([
   {
@@ -64,7 +75,9 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <AuthContextProvider>
-      <RouterProvider router={router} />
+      <CoinsProvider>
+        <RouterProvider router={router} />
+      </CoinsProvider>
     </AuthContextProvider>
   );
 };

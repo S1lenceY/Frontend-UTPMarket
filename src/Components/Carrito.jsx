@@ -8,8 +8,21 @@ import Caja from "../Assets/Caja.jpg";
 import Logo from "../Assets/Logo.webp";
 import imagenes from "../Path/Imagenes";
 import PayModal from "./Utils/PayModal";
+import { useCoins } from "../Auth/CoinsContext";
 
 const Carrito = () => {
+   //AÑADIR COINS:
+   const { totalCoins: totalCoinsContext, updateTotalCoins } = useCoins(); // Obtén totalCoins y updateTotalCoins del contexto de monedas
+   const [totalCoinsGanadas, setTotalCoinsGanadas] = useState(0); // Estado para almacenar las monedas ganadas del carrito
+
+
+   // Obtener las monedas totales del localStorage
+   const totalCoinsLocalStorage = parseFloat(localStorage.getItem("totalCoins")) || 0;
+
+  useEffect(() => {
+    setTotalCoinsGanadas(totalCoinsLocalStorage);
+  }, []);
+ 
   //Para obtener productos:
   const [productos, setProductos] = useState([]);
 
@@ -35,7 +48,10 @@ const Carrito = () => {
   const [showModalPay, setShowModalPay] = useState(false);
 
   const handleButtonPayClick = () => {
-    setShowModalPay(true);
+     // Suma el total de monedas ganadas del carrito al total de monedas en el contexto de monedas
+     const newTotalCoins = totalCoinsContext + totalCoinsGanadas;
+     updateTotalCoins(newTotalCoins)
+     setShowModalPay(true);
   };
 
   //Definiendo los métodos de pago
@@ -54,9 +70,6 @@ const Carrito = () => {
 
   // Obtener el precio total del localStorage
   const totalPrice = parseFloat(localStorage.getItem("totalPrice")) || 0;
-
-  // Obtener las coins totales del localStorage
-  const totalCoins = parseFloat(localStorage.getItem("totalCoins")) || 0;
 
   // Calcular el IGV
   const iva = totalPrice * 0.18;
@@ -195,7 +208,7 @@ const Carrito = () => {
                 <div className="flex flex-col text-sm py-3 border-b border-b-black">
                   <span>
                     <b>Coins Ganadas: </b>
-                    {totalCoins}
+                    {totalCoinsGanadas}
                   </span>
                   <span>
                     <b>Lugar de Recepción: </b>UTP Sede Chiclayo
@@ -325,7 +338,7 @@ const Carrito = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <PayModal showModalPay={showModalPay} setShowModalPay={setShowModalPay} setProductos={setProductos}/>
+      <PayModal showModalPay={showModalPay} setShowModalPay={setShowModalPay} setProductos={setProductos} setTotalCoinsGanadas={setTotalCoinsGanadas}/>
     </>
   );
 };

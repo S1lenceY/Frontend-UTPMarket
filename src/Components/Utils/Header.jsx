@@ -6,8 +6,10 @@ import User from "../../Assets/User.png";
 import { IoIosMenu, IoIosArrowDown } from "react-icons/io";
 import { AiOutlineSearch, AiOutlineDollar } from "react-icons/ai";
 import Dropdown from "./Dropdown";
+import { useCoins } from "../../Auth/CoinsContext";
 
 const Header = ({ handleMenuClick }) => {
+  const { totalCoins } = useCoins();
 
   return (
     <>
@@ -36,9 +38,7 @@ const Header = ({ handleMenuClick }) => {
 
         <div className="flex items-center">
           <div className="bg-[#EFF5FE] flex items-center justify-center p-2 gap-2 text-sm ml-7 md:mr-7">
-            <span>
-              {localStorage.getItem('coins')} coins
-            </span>
+            <span>{totalCoins} coins</span>
             <AiOutlineDollar className="text-lg" />
           </div>
           <div className="hidden lg:block ">
@@ -49,13 +49,10 @@ const Header = ({ handleMenuClick }) => {
                 </span>
                 <span className="text-xs self-end">Estudiante</span>
               </div>
-              <img
-                src={User}
-                className="rounded-full h-10 w-10"
-              />
+              <img src={User} className="rounded-full h-10 w-10" />
             </div>
           </div>
-          
+
           <Dropdown />
         </div>
       </div>
