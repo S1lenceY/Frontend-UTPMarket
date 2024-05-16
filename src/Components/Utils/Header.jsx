@@ -37,7 +37,7 @@ const Header = ({ handleMenuClick }) => {
         <div className="flex items-center">
           <div className="bg-[#EFF5FE] flex items-center justify-center p-2 gap-2 text-sm ml-7 md:mr-7">
             <span>
-              <b>12</b> coins
+              {localStorage.getItem('coins')} coins
             </span>
             <AiOutlineDollar className="text-lg" />
           </div>

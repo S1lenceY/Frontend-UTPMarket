@@ -115,10 +115,10 @@ const Productos = () => {
                       <span className="text-sm">{product.id_category}</span>
                     </div>
                     <div className="flex gap-3">
-                      <span className="bg-slate-300 p-1.5 text-sm">
+                      <span className="bg-[#EFF5FE] p-1.5 text-sm text-[#434A5D]">
                         S/ {product.price}
                       </span>
-                      <span className="text-sm bg-slate-300 p-1.5 flex items-center gap-1">
+                      <span className="text-sm bg-[#EFF5FE] p-1.5 flex items-center gap-1 text-[#434A5D]">
                         {product.coin}
                         <AiOutlineDollar />
                       </span>
@@ -128,12 +128,13 @@ const Productos = () => {
                     <input
                       type="number"
                       id={`quantity_${product.id_producto}`}
-                      className="w-20 outline-none p-1.5 bg-slate-300 rounded-md "
+                      className="w-12 outline-none p-1.5 bg-[#EFF5FE] rounded-md "
                       onFocus={handleInputFocus} // Habilita el botón cuando se hace clic en el input
                       min={1} // Establece el valor mínimo como 1
+                      placeholder="1"
                     />
                     <button
-                      className={`bg-[#292929] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition ${
+                      className={`bg-[#000F37] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition ${
                         !buttonEnabled ? "opacity-50 cursor-not-allowed" : ""
                       }`}
                       onClick={() => handleAddToCart(product)}

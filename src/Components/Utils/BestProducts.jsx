@@ -18,21 +18,21 @@ const BestProducts = () => {
       coin: 2,
     },
     {
-      id: 2,
+      id: 3,
       name: "Capuchino",
       id_category: "Panaderia",
       price: 15,
       coin: 3,
     },
     {
-      id: 3,
+      id: 6,
       name: "Té Verde",
       id_category: "Panaderia",
       price: 15,
       coin: 4,
     },
     {
-      id: 4,
+      id: 2,
       name: "Café Latte",
       id_category: "Panaderia",
       price: 15,
@@ -77,7 +77,8 @@ const BestProducts = () => {
                   <input
                     type="number"
                     className="w-12 outline-none p-1.5 bg-[#EFF5FE] rounded-md "
-                    placeholder="0"
+                    placeholder="1"
+                    min="1"
                   />
                   <button className="bg-[#000F37] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition">
                     Agregar al carrito

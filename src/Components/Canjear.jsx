@@ -74,7 +74,7 @@ const Canjear = () => {
                     <span className="text-sm">{d.id_category}</span>
                   </div>
                   <div className="flex gap-3">
-                    <span className="text-sm bg-slate-300 p-1.5 flex items-center gap-1">
+                    <span className="text-sm bg-[#EFF5FE] p-1.5 flex items-center gap-1 text-[#434A5D]">
                       {d.coin}
                       <AiOutlineDollar />
                     </span>
@@ -83,10 +83,11 @@ const Canjear = () => {
                 <div className="flex justify-between p-4">
                   <input
                     type="number"
-                    className="w-20 outline-none p-1.5 bg-slate-300 rounded-md "
+                    className="w-12 outline-none p-1.5 bg-[#EFF5FE] rounded-md "
+                    placeholder="1"
                   />
                   <button
-                    className="bg-[#292929] border-2 border-[#3e3e3e] rounded-lg text-white px-7 py-1 text-xs hover:border-[#fff] cursor-pointer transition"
+                    className="bg-[#000F37] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition"
                     onClick={handleButtonClick}
                   >
                     Canjear
