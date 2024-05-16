@@ -127,7 +127,7 @@ const Productos = () => {
                   <div className="flex justify-between p-4">
                     <input
                       type="number"
-                      id={`quantity_${product.id_producto}`}
+                      id={`quantity_${product.id}`}
                       className="w-12 outline-none p-1.5 bg-[#EFF5FE] rounded-md "
                       onFocus={handleInputFocus} // Habilita el botón cuando se hace clic en el input
                       min={1} // Establece el valor mínimo como 1
