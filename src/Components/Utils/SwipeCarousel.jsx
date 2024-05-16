@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
+import Slide1 from "../../Assets/Slide1.png"
+import Slide2 from "../../Assets/Slide2.png"
+import Slide3 from "../../Assets/Slide3.png"
 
 const imgs = [
-  "/src/Assets/Slide1.png",
-  "/src/Assets/Slide2.png",
-  "/src/Assets/Slide3.png",
+  Slide1,
+  Slide2,
+  Slide3
 ];
 
 const SwipeCarousel = () => {

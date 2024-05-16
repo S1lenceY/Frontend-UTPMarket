@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiOutlineDollar } from "react-icons/ai";
 import { useLoaderData } from "react-router-dom";
+import imagenes from "../Path/Imagenes"
 
 const Productos = () => {
   //Añadir precio total al carrito:
@@ -87,40 +88,51 @@ const Productos = () => {
             <span>|</span> {category}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4 gap-8">
-            {products.map((product, index) => (
-              <div key={index} className="bg-white text-black rounded-md w-72">
-                <img src="/src/Assets/PanBlanco.jpg" className="rounded-t-md w-full h-32" />
-                <div className=" bg-yellow-200 w-full h-3"></div>
-                <div className="flex mt-2 justify-between px-5 items-center">
-                  <div className="flex flex-col">
-                    <span className="font-bold">{product.name}</span>
-                    <span className="text-sm">{product.id_category}</span>
-                  </div>
-                  <div className="flex gap-3">
-                    <span className="bg-slate-300 p-1.5 text-sm">
-                      S/ {product.price}
-                    </span>
-                    <span className="text-sm bg-slate-300 p-1.5 flex items-center gap-1">
-                      {product.coin}
-                      <AiOutlineDollar />
-                    </span>
-                  </div>
-                </div>
-                <div className="flex justify-between p-4">
-                  <input
-                    type="number"
-                    id={`quantity_${product.id_producto}`}
-                    className="w-20 outline-none p-1.5 bg-slate-300 rounded-md "
+            {products.map((product, index) => {
+              // Buscar la imagen correspondiente al nombre del producto
+              const imagen = imagenes.find((img) => img.name === product.name);
+              return (
+                <div
+                  key={index}
+                  className="bg-white text-black rounded-md w-72"
+                >
+                  <img
+                    src={imagen ? imagen.url : ""}
+                    alt={product.name}
+                    className="rounded-t-md w-full h-32"
                   />
-                  <button
-                    className="bg-[#292929] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition"
-                    onClick={() => handleAddToCart(product)}
-                  >
-                    Agregar al carrito
-                  </button>
+                  <div className=" bg-yellow-200 w-full h-3"></div>
+                  <div className="flex mt-2 justify-between px-5 items-center">
+                    <div className="flex flex-col">
+                      <span className="font-bold">{product.name}</span>
+                      <span className="text-sm">{product.id_category}</span>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="bg-slate-300 p-1.5 text-sm">
+                        S/ {product.price}
+                      </span>
+                      <span className="text-sm bg-slate-300 p-1.5 flex items-center gap-1">
+                        {product.coin}
+                        <AiOutlineDollar />
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex justify-between p-4">
+                    <input
+                      type="number"
+                      id={`quantity_${product.id_producto}`}
+                      className="w-20 outline-none p-1.5 bg-slate-300 rounded-md "
+                    />
+                    <button
+                      className="bg-[#292929] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition"
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      Agregar al carrito
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       ))}

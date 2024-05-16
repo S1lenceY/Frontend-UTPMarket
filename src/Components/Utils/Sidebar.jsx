@@ -145,7 +145,10 @@ const Sidebar = () => {
             className={` flex items-center py-4 px-6 gap-10 mb-10 ${
               selectedLink === INICIO ? "bg-background text-[#000f37]" : "text-white"
             }`}
-            onClick={() => handleLinkClick(INICIO)}
+            onClick={() => {
+              handleLinkClick(INICIO);
+              handleBackClick();
+            }}
           >
             <GoHome className="text-2xl" />
             <span className="text-sm">Inicio</span>
@@ -156,7 +159,10 @@ const Sidebar = () => {
             className={` flex items-center py-4 px-6 gap-10 mb-10 ${
               selectedLink === PRODUCTOS ? "bg-background text-[#000f37]" : "text-white"
             }`}
-            onClick={() => handleLinkClick(PRODUCTOS)}
+            onClick={() => {
+              handleLinkClick(PRODUCTOS);
+              handleBackClick();
+            }}
           >
             <BiDish className="text-2xl" />
             <span className="text-sm">Productos</span>
@@ -167,7 +173,10 @@ const Sidebar = () => {
             className={` flex items-center py-4 px-6 gap-10 mb-10 ${
               selectedLink === CANJEAR ? "bg-background text-[#000f37]" : "text-white"
             }`}
-            onClick={() => handleLinkClick(CANJEAR)}
+            onClick={() => {
+              handleLinkClick(CANJEAR);
+              handleBackClick();
+            }}
           >
             <GoGift className="text-2xl" />
             <span className="text-sm">Canjear</span>
@@ -178,7 +187,10 @@ const Sidebar = () => {
             className={` flex items-center py-4 px-6 gap-10 mb-10 ${
               selectedLink === CARRITO ? "bg-background text-[#000f37]" : "text-white"
             }`}
-            onClick={() => handleLinkClick(CARRITO)}
+            onClick={() => {
+              handleLinkClick(CARRITO);
+              handleBackClick();
+            }}
           >
             <MdOutlineShoppingCart className="text-2xl" />
             <span className="text-sm">Carrito</span>

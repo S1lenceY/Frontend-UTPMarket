@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import AxiosHeader from "../Auth/AxiosHeader";
+import PayPal from "../Assets/PayPal.png";
+import Caja from "../Assets/Caja.jpg";
+import Logo from "../Assets/Logo.webp";
+import imagenes from "../Path/Imagenes";
+import PayModal from "./Utils/PayModal";
 
 const Carrito = () => {
   //Para obtener productos:
@@ -14,7 +19,7 @@ const Carrito = () => {
 
   console.log(productos);
 
-  //Para abrir modal
+  //Para abrir modal de Método de Pago:
   const [showModal, setShowModal] = useState(false);
 
   const handleButtonClick = () => {
@@ -25,16 +30,23 @@ const Carrito = () => {
     setShowModal(false);
   };
 
+  //Para abrir modal de Pago exitoso:
+  const [showModalPay, setShowModalPay] = useState(false);
+
+  const handleButtonPayClick = () => {
+    setShowModalPay(true);
+  };    
+
   //Definiendo los métodos de pago
   const pago = [
     {
       name: "VISA",
-      img: "/src/Assets/VISA.jpg",
+      img: VISA,
       category: "Banca Movil",
     },
     {
-      name: "VISA",
-      img: "/src/Assets/VISA.jpg",
+      name: "PayPal",
+      img: PayPal,
       category: "Banca Movil",
     },
   ];
@@ -53,7 +65,7 @@ const Carrito = () => {
 
   //Haciendo POST:
   // Generar un id de usuario aleatorio (CORREGIR POR EL ID DE USUARIO VERDADERO)
-  const userId = localStorage.getItem('userID');
+  const userId = localStorage.getItem("userID");
 
   // Obtener la fecha actual en formato YYYY-MM-DD
   const currentDate = new Date().toISOString().split("T")[0];
@@ -65,11 +77,14 @@ const Carrito = () => {
   const handleEnviarComprobante = async () => {
     AxiosHeader();
     try {
-      const response = await axios.post("http://localhost:8080/utp-market-api/comprobante", {
-        fecha: currentDate,
-        total: totalPagar,
-        id_usuario: userId,
-      });
+      const response = await axios.post(
+        "http://localhost:8080/utp-market-api/comprobante",
+        {
+          fecha: currentDate,
+          total: totalPagar,
+          id_usuario: userId,
+        }
+      );
       console.log("Comprobante enviado con éxito:", response.data);
 
       // Almacenar la respuesta del backend en el estado
@@ -123,37 +138,45 @@ const Carrito = () => {
         </div>
         <div className="flex">
           <div className="flex gap-10 mt-4">
-            <div className=" flex-col gap-5 max-h-[424px] overflow-y-auto scroll hidden md:flex">
-              {productos.map((producto, index) => (
-                <div
-                  key={index}
-                  className="bg-white text-black rounded-md w-fit flex mr-3"
-                >
-                  <div className="flex">
-                    <img
-                      src="/src/Assets/PanBlanco.jpg"
-                      className="rounded-s-md w-64 h-32 "
-                    />
-                    <div className=" bg-yellow-200 h-full w-2"></div>
-                  </div>
-                  <div className="flex flex-col mt-2 justify-between p-3 px-5">
-                    <div className="flex flex-col">
-                      <span className="font-bold">{producto.nombre}</span>
-                      <span className="text-sm">
-                        Producto de {producto.id_category}
-                      </span>
+            <div className="flex-col gap-5 max-h-[424px] overflow-y-auto scroll hidden md:flex">
+              {productos.map((producto, index) => {
+                // Encuentra la imagen correspondiente al producto
+                const imagen = imagenes.find(
+                  (img) => img.name === producto.nombre
+                );
+
+                return (
+                  <div
+                    key={index}
+                    className="bg-white text-black rounded-md w-fit flex mr-3"
+                  >
+                    <div className="flex">
+                      <img
+                        src={imagen ? imagen.url : ""} // Si no se encuentra la imagen, se usa una de relleno
+                        className="rounded-s-md w-64 h-32"
+                        alt={producto.nombre}
+                      />
+                      <div className="bg-yellow-200 h-full w-2"></div>
                     </div>
-                    <div className="flex gap-3 ml-40">
-                      <span className="text-sm bg-slate-300 p-1.5 flex items-center gap-1">
-                        {producto.cantidad} unidades
-                      </span>
-                      <span className="bg-[#000f37] text-white rounded-sm p-1.5 text-sm">
-                        S/ {producto.precio}
-                      </span>
+                    <div className="flex flex-col mt-2 justify-between p-3 px-5">
+                      <div className="flex flex-col">
+                        <span className="font-bold">{producto.nombre}</span>
+                        <span className="text-sm">
+                          Producto de {producto.id_category}
+                        </span>
+                      </div>
+                      <div className="flex gap-3 ml-40">
+                        <span className="text-sm bg-slate-300 p-1.5 flex items-center gap-1">
+                          {producto.cantidad} unidades
+                        </span>
+                        <span className="bg-[#000f37] text-white rounded-sm p-1.5 text-sm">
+                          S/ {producto.precio}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
             <div className="flex flex-col">
               <div className="bg-white px-10 py-7 ">
@@ -229,7 +252,7 @@ const Carrito = () => {
             >
               <div className="w-fit flex transform overflow-hidden rounded bg-background p-5 text-left align-middle shadow-xl transition-all text-black">
                 <div className="hidden lg:block">
-                  <img src="/src/Assets/FondoLoader.webp" className=" w-72" />
+                  <img src={Logo} className=" w-72" />
                 </div>
                 <div className="flex flex-col ml-4">
                   <div className="bg-white p-3 text-lg md:p-3 md:text-2xl gap-2 flex font-bold">
@@ -252,7 +275,10 @@ const Carrito = () => {
                             <span className="text-sm">{p.category}</span>
                           </div>
                           <div className="self-end">
-                            <button className=" p-1 px-3 rounded text-white text-sm bg-[#000f37] " onClick={handleEnviarDetalleCompra}>
+                            <button
+                              className=" p-1 px-3 rounded text-white text-sm bg-[#000f37] "
+                              onClick={ ()=> { handleEnviarDetalleCompra(); handleButtonPayClick(); handleCloseModal(); }}
+                            >
                               Elegir
                             </button>
                           </div>
@@ -262,10 +288,7 @@ const Carrito = () => {
 
                     <div className="bg-white text-black rounded-md w-fit flex flex-col m-3">
                       <div className="flex flex-col">
-                        <img
-                          src="/src/Assets/Logo.webp"
-                          className="rounded-t-md w-56 h-32 "
-                        />
+                        <img src={Caja} className="rounded-t-md w-56 h-32 " />
                         <div className=" bg-yellow-200 w-full h-2"></div>
                       </div>
 
@@ -275,9 +298,7 @@ const Carrito = () => {
                           <span className="text-sm">Pago en Caja</span>
                         </div>
                         <div className="self-end">
-                          <button className=" p-1 px-3 rounded text-white text-sm bg-[#000f37] ">
-                            {" "}
-                            {/*Al hacer click aquí se debe hacer el post de detallecompra*/}
+                          <button className=" p-1 px-3 rounded text-white text-sm bg-[#000f37] " onClick={()=> {handleButtonPayClick(); handleCloseModal();}}>
                             Elegir
                           </button>
                         </div>
@@ -290,6 +311,7 @@ const Carrito = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      <PayModal showModalPay={showModalPay} setShowModalPay={setShowModalPay}/>
     </>
   );
 };
