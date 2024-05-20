@@ -1,14 +1,19 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import { motion, AnimatePresence } from "framer-motion";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiOutlineDollar } from "react-icons/ai";
 import { ImHappy } from "react-icons/im";
 import imagenes from "../Path/Imagenes";
 import { useCoins } from "../Auth/CoinsContext";
+import { useLoaderData } from "react-router-dom";
 
 const Canjear = () => {
-  const { totalCoins, updateTotalCoins } = useCoins();
+  
+  //Recibimos los datos de la API
+  const data = useLoaderData();
 
+  const { totalCoins, updateTotalCoins } = useCoins();
   //Para abrir modal
   const [showModal, setShowModal] = useState(false);
 
@@ -19,48 +24,42 @@ const Canjear = () => {
     updateTotalCoins(newTotalCoins);
   };
 
-  const handleButtonClick = (coinsToSubtract) => {
+  const handleButtonClick = async (index, d) => {
+    // Obtener el valor del input correspondiente al índice
+    const inputValueFloat = parseFloat(inputValues[index].trim());
+
+    // Verificar si el valor del input es válido
+    const quantity = !isNaN(inputValueFloat) && inputValueFloat > 0 ? inputValueFloat : 1;
+
     // Lógica para abrir modal u otras operaciones necesarias
     setShowModal(true);
+
+    // Calcular las monedas a canjear
+    const coinsToSubtract = quantity * d.coinCanje;
+
     // Llamar a la función para restar las monedas
     handleCanjear(coinsToSubtract);
+
+    // Enviar las monedas actualizadas al backend
+    const userId = localStorage.getItem("userID");
+
+    try {
+      await axios.post('http://localhost:8080/utp-market-api/usuarios/ActualizarCoins', {
+        id: userId,
+        coins: `-${coinsToSubtract}`
+      });
+      console.log('Coins actualizadas con éxito');
+    } catch (error) {
+      console.error('Error al actualizar las coins:', error);
+    }
   };
+
 
   const handleCloseModal = () => {
     setShowModal(false);
   };
 
-  //Cambiar esto por la recepción de datos que me den en el API
-  const data = [
-    {
-      id: 1,
-      name: "Pan Blanco",
-      id_category: "Panaderia",
-      price: 15,
-      coin: 2,
-    },
-    {
-      id: 2,
-      name: "Capuchino",
-      id_category: "Panaderia",
-      price: 15,
-      coin: 3,
-    },
-    {
-      id: 3,
-      name: "Té Verde",
-      id_category: "Panaderia",
-      price: 15,
-      coin: 4,
-    },
-    {
-      id: 4,
-      name: "Café Latte",
-      id_category: "Panaderia",
-      price: 15,
-      coin: 5,
-    },
-  ];
+  const [inputValues, setInputValues] = useState(Array(data.length).fill('')); // Estado para los valores de los inputs
 
   return (
     <>
@@ -84,11 +83,10 @@ const Canjear = () => {
                 <div className="flex mt-2 justify-between px-5 items-center">
                   <div className="flex flex-col">
                     <span className="font-bold">{d.name}</span>
-                    <span className="text-sm">{d.id_category}</span>
                   </div>
                   <div className="flex gap-3">
                     <span className="text-sm bg-[#EFF5FE] p-1.5 flex items-center gap-1 text-[#434A5D]">
-                      {d.coin}
+                      {d.coinCanje}
                       <AiOutlineDollar />
                     </span>
                   </div>
@@ -99,11 +97,17 @@ const Canjear = () => {
                     className="w-12 outline-none p-1.5 bg-[#EFF5FE] rounded-md"
                     placeholder="1"
                     min={1}
+                    value={inputValues[index]} // Usar el valor del estado correspondiente al índice
+                    onChange={(e) => {
+                      const newInputValues = [...inputValues];
+                      newInputValues[index] = e.target.value;
+                      setInputValues(newInputValues);
+                    }}
                   />
                   <button
                     className="bg-[#000F37] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition"
                     onClick={() => {
-                      handleButtonClick(d.coin); // Pasar d.coin como argumento 
+                      handleButtonClick(index, d); // Pasar el índice y el objeto d como argumento
                     }}
                   >
                     Canjear

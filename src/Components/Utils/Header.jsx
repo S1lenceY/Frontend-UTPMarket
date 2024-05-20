@@ -8,9 +8,27 @@ import { AiOutlineSearch, AiOutlineDollar } from "react-icons/ai";
 import Dropdown from "./Dropdown";
 import { useCoins } from "../../Auth/CoinsContext";
 
-const Header = ({ handleMenuClick }) => {
-  const { totalCoins } = useCoins();
+function LoadingScreen() {
+  return (
+    <div className="bg-[#EFF5FE] flex items-center justify-center p-2 gap-2 text-sm ml-7 md:mr-7">
+      <div className="animate-pulse rounded-md bg-gray-500 w-10 h-3"> </div>
+      <div className="animate-pulse rounded-full bg-gray-500 w-5 h-5"> </div>
+    </div>
+  );
+}
 
+const Header = ({ handleMenuClick }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // Espera de 2 segundos
+
+    return () => clearTimeout(timer); // Limpiar el temporizador
+  }, []);
+
+  const { totalCoins } = useCoins();
   return (
     <>
       <div className="fixed flex md:absolute md:h-20 h-14 w-screen bg-inputbackground items-center justify-between z-10">
@@ -30,22 +48,26 @@ const Header = ({ handleMenuClick }) => {
             <input
               type="search"
               placeholder="Buscar producto"
-              className=" w-20 md:w-72 bg-transparent outline-none text-sm p2"
+              className=" w-11 sm:w-28 md:w-72 bg-transparent outline-none text-sm p2 sm:border-r sm:border-r-slate-800"
             />
             <AiOutlineSearch />
           </div>
         </div>
 
         <div className="flex items-center">
-          <div className="bg-[#EFF5FE] flex items-center justify-center p-2 gap-2 text-sm ml-7 md:mr-7">
-            <span>{totalCoins} coins</span>
-            <AiOutlineDollar className="text-lg" />
-          </div>
+          {isLoading ? (
+            <LoadingScreen />
+          ) : (
+            <div className="bg-[#EFF5FE] flex items-center justify-center p-2 gap-2 text-sm  md:mr-7">
+              <span>{totalCoins} coins</span>
+              <AiOutlineDollar className="text-lg" />
+            </div>
+          )}
           <div className="hidden lg:block ">
             <div className=" pl-5 gap-4 items-center flex border-l-slate-500 border-l">
               <div className="flex flex-col">
                 <span className="text-sm">
-                  Hola, <b>{localStorage.getItem('usuario')}</b>
+                  Hola, <b>{localStorage.getItem("usuario")}</b>
                 </span>
                 <span className="text-xs self-end">Estudiante</span>
               </div>

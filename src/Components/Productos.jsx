@@ -5,13 +5,6 @@ import { useLoaderData } from "react-router-dom";
 import imagenes from "../Path/Imagenes";
 
 const Productos = () => {
-  //Lógica del Button Validado
-  const [buttonEnabled, setButtonEnabled] = useState(false);
-
-  const handleInputFocus = () => {
-    setButtonEnabled(true);
-  };
-
   //Añadir precio total al carrito:
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -30,22 +23,44 @@ const Productos = () => {
 
   // Manejar clic en "Agregar al carrito"
   const handleAddToCart = (product) => {
-    const quantity = parseFloat(
-      document.getElementById(`quantity_${product.id}`).value
+    const quantityInput = document.getElementById(`quantity_${product.id}`);
+    let quantity = parseFloat(quantityInput.value);
+
+    // Verificar si el valor ingresado es válido
+    if (isNaN(quantity) || quantity <= 0) {
+      quantity = 1; // Establecer la cantidad en 1 por defecto
+      quantityInput.value = 1; // Actualizar el valor del input
+    }
+
+    // Verificar si el producto ya está en el carrito
+    const existingItemIndex = cartItems.findIndex(
+      (item) => item.id_producto === product.id
     );
 
-    const newItem = {
-      id_comprobante: "", // Cambiar esto por el ID real
-      id_producto: product.id,
-      nombre: product.name,
-      id_category: product.id_category,
-      cantidad: quantity,
-      precio: product.price,
-      coin: product.coin,
-      estado_entrega: false,
-      estado_pago: false,
-    };
-    const updatedCart = [...cartItems, newItem];
+    let updatedCart;
+    if (existingItemIndex !== -1) {
+      // Si el producto ya está en el carrito, actualizar su cantidad
+      updatedCart = cartItems.map((item, index) =>
+        index === existingItemIndex
+          ? { ...item, cantidad: item.cantidad + quantity }
+          : item
+      );
+    } else {
+      // Si el producto no está en el carrito, agregarlo
+      const newItem = {
+        id_comprobante: "", // Cambiar esto por el ID real
+        id_producto: product.id,
+        nombre: product.name,
+        id_category: product.id_category,
+        cantidad: quantity,
+        precio: product.price,
+        coin: product.coin,
+        estado_entrega: false,
+        estado_pago: false,
+      };
+      updatedCart = [...cartItems, newItem];
+    }
+
     setCartItems(updatedCart);
     localStorage.setItem("cartItems", JSON.stringify(updatedCart));
 
@@ -86,6 +101,22 @@ const Productos = () => {
     acc[curr.id_category].push(curr);
     return acc;
   }, {});
+
+  //Para que sepas cuando ha cambiado el valor de tu compra:
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    // Añadir la clase de animación cuando el totalPrice cambie
+    setAnimate(true);
+
+    // Quitar la clase de animación después de 1 segundo
+    const timer = setTimeout(() => {
+      setAnimate(false);
+    }, 2000);
+
+    // Limpiar el temporizador si el componente se desmonta antes de que el temporizador termine
+    return () => clearTimeout(timer);
+  }, [totalPrice]);
 
   return (
     <>
@@ -129,16 +160,12 @@ const Productos = () => {
                       type="number"
                       id={`quantity_${product.id}`}
                       className="w-12 outline-none p-1.5 bg-[#EFF5FE] rounded-md "
-                      onFocus={handleInputFocus} // Habilita el botón cuando se hace clic en el input
                       min={1} // Establece el valor mínimo como 1
                       placeholder="1"
                     />
                     <button
-                      className={`bg-[#000F37] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition ${
-                        !buttonEnabled ? "opacity-50 cursor-not-allowed" : ""
-                      }`}
+                      className="bg-[#000F37] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition "
                       onClick={() => handleAddToCart(product)}
-                      disabled={!buttonEnabled} // Deshabilita el botón si no está habilitado
                     >
                       Agregar al carrito
                     </button>
@@ -150,7 +177,11 @@ const Productos = () => {
         </div>
       ))}
 
-      <div className="bg-[#000f37] p-3 md:p-4 rounded-full md:rounded-sm text-white flex items-center gap-2 text-sm font-bold fixed right-3 md:right-6">
+      <div
+        className={`bg-[#000f37] hover:brightness-150  p-3 md:p-4 rounded-full md:rounded-sm text-white flex items-center gap-2 text-sm font-bold fixed right-3 md:right-6 ${
+          animate ? "animate-pulse" : ""
+        }`}
+      >
         S/ {totalPrice.toFixed(1)}
         <MdOutlineShoppingCart className="text-lg" />
       </div>

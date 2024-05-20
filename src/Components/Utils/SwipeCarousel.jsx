@@ -35,7 +35,7 @@ const SwipeCarousel = () => {
   }, [currentIndex, controls]);
 
   return (
-    <div className="relative w-full h-28 sm:h-40 md:h-48 lg:h-72 overflow-hidden">
+    <div className="flex flex-col w-fit h-fit mb-5 overflow-hidden">
       <motion.div
         className="flex"
         style={{ width: `${imgs.length * 100}%`, x: 0 }}
@@ -50,12 +50,12 @@ const SwipeCarousel = () => {
           />
         ))}
       </motion.div>
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <div className="flex gap-2 mt-5 self-center ">
         {imgs.map((_, index) => (
           <button
             key={index}
-            className={`h-3 w-3 rounded-full ${
-              index === currentIndex ? "bg-black" : "bg-gray-300"
+            className={`h-2 w-2 rounded-full transition-all ${
+              index === currentIndex ? "bg-blue-600 w-4" : "bg-gray-400"
             }`}
             onClick={() => handleDotClick(index)}
           ></button>

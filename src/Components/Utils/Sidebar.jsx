@@ -4,6 +4,7 @@ import { FiArrowLeft } from "react-icons/fi";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { BiDish } from "react-icons/bi";
 import { GoHome, GoGift } from "react-icons/go";
+import User from "../../Assets/User.png";
 import ThemeButton from "../Utils/ThemeButton";
 import Header from "./Header";
 import { Link } from "react-router-dom";
@@ -41,12 +42,23 @@ const Sidebar = () => {
 
   useEffect(() => {
     // Calcular el desplazamiento del div rojo
-    if (selectedLink) {
-      const selectedLinkElement = document.getElementById(selectedLink);
-      if (selectedLinkElement) {
-        setTopOffset(selectedLinkElement.offsetTop);
+    const updateTopOffset = () => {
+      if (selectedLink) {
+        const selectedLinkElement = document.getElementById(selectedLink);
+        if (selectedLinkElement) {
+          setTopOffset(selectedLinkElement.offsetTop);
+        }
       }
-    }
+    };
+
+    updateTopOffset();
+
+    // Recalcular el desplazamiento del div rojo cuando cambia el tamaño de la ventana
+    window.addEventListener("resize", updateTopOffset);
+
+    return () => {
+      window.removeEventListener("resize", updateTopOffset);
+    };
   }, [selectedLink]);
 
   return (
@@ -68,7 +80,9 @@ const Sidebar = () => {
           id={INICIO}
           to={INICIO}
           className={` flex flex-col items-center justify-center h-20 gap-2 ${
-            selectedLink === INICIO ? "bg-background text-[#000f37]" : "text-white"
+            selectedLink === INICIO
+              ? "bg-background text-[#000f37]"
+              : "text-white"
           }`}
           onClick={() => handleLinkClick(INICIO)}
         >
@@ -79,7 +93,9 @@ const Sidebar = () => {
           id={PRODUCTOS}
           to={PRODUCTOS}
           className={` flex flex-col items-center justify-center h-20 gap-2 ${
-            selectedLink === PRODUCTOS ? "bg-background text-[#000f37]" : "text-white"
+            selectedLink === PRODUCTOS
+              ? "bg-background text-[#000f37]"
+              : "text-white"
           }`}
           onClick={() => handleLinkClick(PRODUCTOS)}
         >
@@ -90,7 +106,9 @@ const Sidebar = () => {
           id={CANJEAR}
           to={CANJEAR}
           className={` flex flex-col items-center justify-center h-20 gap-2 ${
-            selectedLink === CANJEAR ? "bg-background text-[#000f37]" : "text-white"
+            selectedLink === CANJEAR
+              ? "bg-background text-[#000f37]"
+              : "text-white"
           }`}
           onClick={() => handleLinkClick(CANJEAR)}
         >
@@ -101,7 +119,9 @@ const Sidebar = () => {
           id={CARRITO}
           to={CARRITO}
           className={` flex flex-col items-center justify-center h-20 gap-2 ${
-            selectedLink === CARRITO ? "bg-background text-[#000f37]" : "text-white"
+            selectedLink === CARRITO
+              ? "bg-background text-[#000f37]"
+              : "text-white"
           }`}
           onClick={() => handleLinkClick(CARRITO)}
         >
@@ -130,20 +150,24 @@ const Sidebar = () => {
           <FiArrowLeft className="m-4" />
         </div>
         <div className="flex items-center gap-3 pb-4 pl-6 border-b border-b-blue-950">
-          <img src="/src/Assets/Logo.webp" className="rounded-full h-10 w-10" />
+          <img src={User} className="rounded-full h-10 w-10" />
           <div className="flex flex-col py-4">
-            <span className="text-sm font-semibold">¡Hola Gabriel Paiva!</span>
-            <span className="text-xs">u12345678@utp.edu.pe</span>
+            <span className="text-sm font-semibold">
+              ¡Hola {localStorage.getItem("usuario")}!
+            </span>
+            <span className="text-xs">
+              {localStorage.getItem("rol")}@utp.edu.pe
+            </span>
           </div>
         </div>
-        
+
         <div className="pt-7">
-          
           <Link
-            id={INICIO}
             to={INICIO}
             className={` flex items-center py-4 px-6 gap-10 mb-10 ${
-              selectedLink === INICIO ? "bg-background text-[#000f37]" : "text-white"
+              selectedLink === INICIO
+                ? "bg-background text-[#000f37]"
+                : "text-white"
             }`}
             onClick={() => {
               handleLinkClick(INICIO);
@@ -154,10 +178,11 @@ const Sidebar = () => {
             <span className="text-sm">Inicio</span>
           </Link>
           <Link
-            id={PRODUCTOS}
             to={PRODUCTOS}
             className={` flex items-center py-4 px-6 gap-10 mb-10 ${
-              selectedLink === PRODUCTOS ? "bg-background text-[#000f37]" : "text-white"
+              selectedLink === PRODUCTOS
+                ? "bg-background text-[#000f37]"
+                : "text-white"
             }`}
             onClick={() => {
               handleLinkClick(PRODUCTOS);
@@ -168,10 +193,11 @@ const Sidebar = () => {
             <span className="text-sm">Productos</span>
           </Link>
           <Link
-            id={CANJEAR}
             to={CANJEAR}
             className={` flex items-center py-4 px-6 gap-10 mb-10 ${
-              selectedLink === CANJEAR ? "bg-background text-[#000f37]" : "text-white"
+              selectedLink === CANJEAR
+                ? "bg-background text-[#000f37]"
+                : "text-white"
             }`}
             onClick={() => {
               handleLinkClick(CANJEAR);
@@ -182,10 +208,11 @@ const Sidebar = () => {
             <span className="text-sm">Canjear</span>
           </Link>
           <Link
-            id={CARRITO}
             to={CARRITO}
             className={` flex items-center py-4 px-6 gap-10 mb-10 ${
-              selectedLink === CARRITO ? "bg-background text-[#000f37]" : "text-white"
+              selectedLink === CARRITO
+                ? "bg-background text-[#000f37]"
+                : "text-white"
             }`}
             onClick={() => {
               handleLinkClick(CARRITO);

@@ -5,44 +5,13 @@ import { useLoaderData } from "react-router-dom";
 import imagenes from "../../Path/Imagenes";
 
 const BestProducts = () => {
-  //Importamos el JSON obtenido de la API aquí, para usarlo simplemente cambiar por bestProducts.map
-  const bestProducts = useLoaderData();
 
   //Cambiar esto por la recepción de datos que me den en el API
-  const data = [
-    {
-      id: 1,
-      name: "Pan Blanco",
-      id_category: "Panaderia",
-      price: 15,
-      coin: 2,
-    },
-    {
-      id: 3,
-      name: "Capuchino",
-      id_category: "Panaderia",
-      price: 15,
-      coin: 3,
-    },
-    {
-      id: 6,
-      name: "Té Verde",
-      id_category: "Panaderia",
-      price: 15,
-      coin: 4,
-    },
-    {
-      id: 2,
-      name: "Café Latte",
-      id_category: "Panaderia",
-      price: 15,
-      coin: 5,
-    },
-  ];
+  const data = useLoaderData();
 
   return (
     <>
-      <div className="mt-5 flex max-w-72 sm:max-w-[600px] md:max-w-[1112px] overflow-x-auto scroll">
+      <div className="mt-5 w-72 sm:w-[610px] lg:w-[910px] xl:w-full flex overflow-x-auto scroll self-center sm:self-start">
         <div className="flex mb-2">
           {data.map((d, index) => {
             // Buscar la imagen correspondiente al nombre del producto

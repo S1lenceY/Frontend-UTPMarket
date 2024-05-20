@@ -4,7 +4,7 @@ import AxiosHeader from "../../Auth/AxiosHeader";
 export default async function getProductos() {
   AxiosHeader();
   try {
-    const response = await axios.get('https://apiutpmarket-production.up.railway.app/utp-market-api/productos');
+    const response = await axios.get('http://localhost:8080/utp-market-api/productos');
     return response.data;
   } catch (error) {
     console.error('Error al obtener productos:', error);

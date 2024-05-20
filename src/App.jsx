@@ -13,22 +13,23 @@ import {
   CANJEAR,
   CARRITO,
 } from "./Path/Paths";
+import ErrorPage from "./Error/error-page"
 import Chat from "./Components/Chat";
 import Login from "./Components/Login";
 import Logout from "./Components/Logout";
-import ErrorPage from "./Error/ErrorPage";
 import Inicio from "./Components/Inicio";
 import Productos from "./Components/Productos";
 import Canjear from "./Components/Canjear";
 import Carrito from "./Components/Carrito";
 import getProducts from "./Path/Apis.jsx/getProductos";
-import { CoinsProvider } from "./Auth/CoinsContext";
+import getCanjear from "./Path/Apis.jsx/getCanjear";
+import getRecomended from "./Path/Apis.jsx/getRecomended"
+import getCupon from "./Path/Apis.jsx/getCupon"
 
 const router = createBrowserRouter([
   {
     path: CHAT,
     element: <PrivateRoute />,
-    errorElement: <ErrorPage />,
     children: [
       {
         path: MAIN,
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: INICIO,
+            loader: getRecomended,
             element: <Inicio />,
           },
           {
@@ -45,10 +47,12 @@ const router = createBrowserRouter([
           },
           {
             path: CANJEAR,
+            loader: getCanjear,
             element: <Canjear />,
           },
           {
             path: CARRITO,
+            loader: getCupon,
             element: <Carrito />,
           },
         ],
@@ -62,6 +66,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <PublicRoute />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -75,9 +80,7 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <AuthContextProvider>
-      <CoinsProvider>
-        <RouterProvider router={router} />
-      </CoinsProvider>
+      <RouterProvider router={router} />
     </AuthContextProvider>
   );
 };

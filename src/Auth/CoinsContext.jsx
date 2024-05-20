@@ -3,17 +3,26 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const CoinsContext = createContext();
 
 export const CoinsProvider = ({ children }) => {
-  const [totalCoins, setTotalCoins] = useState(parseInt(window.localStorage.getItem("coins")) || 0);
-  console.log("Total de monedas:", totalCoins); // Imprimir totalCoins en la consola
-
-  const updateTotalCoins = (newTotalCoins) => {
-    setTotalCoins(newTotalCoins);
-  };
+  const [totalCoins, setTotalCoins] = useState(0); // Inicialmente 0
 
   useEffect(() => {
-    // Almacenar el nuevo valor de totalCoins en el localStorage
-    window.localStorage.setItem("coins", totalCoins.toString());
-  }, [totalCoins]); // Se ejecutará cada vez que totalCoins cambie
+    const timer = setTimeout(() => {
+      const coinsFromStorage = parseInt(window.localStorage.getItem("coins")) || 0;
+      setTotalCoins(coinsFromStorage);
+      console.log("Total de monedas:", coinsFromStorage); // Imprimir totalCoins en la consola
+    }, 2000); // Espera de 2 segundos
+
+    return () => clearTimeout(timer); // Limpiar el temporizador al desmontar
+  }, []);
+
+  const updateTotalCoins = (newTotalCoins) => {
+    if (newTotalCoins >= 0) {
+      setTotalCoins(newTotalCoins);
+      window.localStorage.setItem("coins", newTotalCoins.toString()); // Almacenar el nuevo valor de totalCoins en el localStorage
+    } else {
+      console.warn("El total de monedas no puede ser negativo.");
+    }
+  };
 
   return (
     <CoinsContext.Provider value={{ totalCoins, updateTotalCoins }}>
