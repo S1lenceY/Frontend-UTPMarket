@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import { IoIosClose } from "react-icons/io";
+import { CiEdit } from "react-icons/ci";
 import VISA from "../Assets/VISA.jpg";
 import PayPal from "../Assets/PayPal.png";
 import Caja from "../Assets/Caja.jpg";
@@ -22,15 +23,18 @@ const Carrito = () => {
   const [showModal, setShowModal] = useState(false);
   const [showModalPay, setShowModalPay] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
   const [couponCode, setCouponCode] = useState("");
   const [discount, setDiscount] = useState(0);
-
   const [totalPrice, setTotalPrice] = useState(
     parseFloat(localStorage.getItem("totalPrice")) || 0
   );
   const [iva, setIva] = useState(totalPrice * 0.18);
   const [totalPagar, setTotalPagar] = useState(totalPrice + iva);
+
+  //Constantes para editar:
+  // Estado para editar productos
+  const [editingProductIndex, setEditingProductIndex] = useState(null);
+  const [newQuantity, setNewQuantity] = useState("");
 
   useEffect(() => {
     setTotalCoinsGanadas(totalCoinsLocalStorage);
@@ -178,6 +182,22 @@ const Carrito = () => {
     calculateTotals(newProductos, discount);
   };
 
+  //Para editar:
+  const handleEditProduct = (index) => {
+    setEditingProductIndex(index);
+    setNewQuantity(productos[index].cantidad.toString());
+  };
+
+  const handleSaveEdit = (index) => {
+    const newProductos = [...productos];
+    newProductos[index].cantidad = parseInt(newQuantity, 10);
+    setProductos(newProductos);
+    localStorage.setItem("cartItems", JSON.stringify(newProductos));
+    calculateTotals(newProductos, discount);
+    setEditingProductIndex(null);
+    setNewQuantity("");
+  };
+
   return (
     <>
       <div className="flex flex-col">
@@ -202,6 +222,12 @@ const Carrito = () => {
                     >
                       <IoIosClose />
                     </div>
+                    <div
+                      className="absolute right-8 top-3 opacity-0 group-hover:opacity-100 transition-all cursor-pointer text-[#000f37]"
+                      onClick={() => handleEditProduct(index)}
+                    >
+                      <CiEdit />
+                    </div>
                     <div className="flex flex-col lg:flex-row">
                       <img
                         src={imagen ? imagen.url : ""}
@@ -218,12 +244,30 @@ const Carrito = () => {
                         </span>
                       </div>
                       <div className="flex gap-3 self-end mt-5">
-                        <span className="text-sm bg-slate-300 p-1.5 flex items-center gap-1">
-                          {producto.cantidad} unidades
-                        </span>
+                        {editingProductIndex === index ? (
+                          <input
+                            type="number"
+                            value={newQuantity}
+                            onChange={(e) => setNewQuantity(e.target.value)}
+                            className="text-sm bg-slate-300 p-1.5 w-14 outline-none"
+                            min={1}
+                          />
+                        ) : (
+                          <span className="text-sm bg-slate-300 p-1.5 flex items-center gap-1">
+                            {producto.cantidad} unidades
+                          </span>
+                        )}
                         <span className="bg-[#000f37] text-white rounded-sm p-1.5 text-sm">
                           S/ {producto.precio}
                         </span>
+                        {editingProductIndex === index && (
+                          <button
+                            onClick={() => handleSaveEdit(index)}
+                            className="bg-green-500 text-white rounded-sm p-1.5 text-sm"
+                          >
+                            ✔
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -310,7 +354,9 @@ const Carrito = () => {
                 {isLoading ? (
                   <div className="flex flex-col items-center justify-center p-3">
                     <div className="animate-spin ease-linear rounded-full w-10 h-10 border-t-2 border-b-2 border-blue-500"></div>
-                    <h2 className="text-zinc-900 mt-4 font-bold text-xl">Procesando...</h2>
+                    <h2 className="text-zinc-900 mt-4 font-bold text-xl">
+                      Procesando...
+                    </h2>
                     <p className="text-zinc-600 mt-1">
                       Porfavor no cierre esta ventana
                     </p>
