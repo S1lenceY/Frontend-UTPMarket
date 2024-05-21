@@ -125,7 +125,7 @@ const Productos = () => {
           <div className="bg-white p-3 text-lg md:p-3 md:text-2xl gap-2 flex font-bold">
             <span>|</span> {category}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4 gap-8">
             {products.map((product, index) => {
               // Buscar la imagen correspondiente al nombre del producto
               const imagen = imagenes.find((img) => img.name === product.name);
