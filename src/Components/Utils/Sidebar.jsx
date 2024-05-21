@@ -40,7 +40,7 @@ const Sidebar = () => {
         </div>
 
         <div
-          className="h-20 bg-red-400 w-1 rounded-full absolute"
+          className="h-20 bg-red-500 w-1 rounded-full absolute"
           style={{ top: `${topOffset}px` }}
         ></div>
         <Link
@@ -131,10 +131,10 @@ const Sidebar = () => {
         <div className="pt-7">
           <Link
             to={INICIO}
-            className={` flex items-center py-4 px-6 gap-10 mb-10 ${
+            className={` flex items-center py-4 px-5 border-l-4 gap-10 mb-10 ${
               selectedLink === INICIO
-                ? "bg-background text-[#000f37]"
-                : "text-white"
+                ? "bg-background text-[#000f37] border-l-4 border-l-red-500"
+                : "text-white border-l-[#000f37]"
             }`}
             onClick={() => {
               handleLinkClick(INICIO);
@@ -146,10 +146,10 @@ const Sidebar = () => {
           </Link>
           <Link
             to={PRODUCTOS}
-            className={` flex items-center py-4 px-6 gap-10 mb-10 ${
+            className={` flex items-center py-4 px-5 border-l-4 gap-10 mb-10 ${
               selectedLink === PRODUCTOS
-                ? "bg-background text-[#000f37]"
-                : "text-white"
+                ? "bg-background text-[#000f37] border-l-4 border-l-red-500"
+                : "text-white border-l-[#000f37]"
             }`}
             onClick={() => {
               handleLinkClick(PRODUCTOS);
@@ -161,10 +161,10 @@ const Sidebar = () => {
           </Link>
           <Link
             to={CANJEAR}
-            className={` flex items-center py-4 px-6 gap-10 mb-10 ${
+            className={` flex items-center py-4 border-l-4 px-5 gap-10 mb-10 ${
               selectedLink === CANJEAR
-                ? "bg-background text-[#000f37]"
-                : "text-white"
+                ? "bg-background text-[#000f37] border-l-4 border-l-red-500"
+                : "text-white border-l-[#000f37]"
             }`}
             onClick={() => {
               handleLinkClick(CANJEAR);
@@ -176,10 +176,10 @@ const Sidebar = () => {
           </Link>
           <Link
             to={CARRITO}
-            className={` flex items-center py-4 px-6 gap-10 mb-10 ${
+            className={` flex items-center py-4 px-5 border-l-4 gap-10 mb-10 ${
               selectedLink === CARRITO
-                ? "bg-background text-[#000f37]"
-                : "text-white"
+                ? "bg-background text-[#000f37]  border-l-red-500"
+                : "text-white border-l-[#000f37]"
             }`}
             onClick={() => {
               handleLinkClick(CARRITO);
