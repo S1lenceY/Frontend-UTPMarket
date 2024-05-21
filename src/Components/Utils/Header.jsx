@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { LOGOUT } from "../../Path/Paths";
 import { Link, useLoaderData } from "react-router-dom";
 import LogoUTP from "../../Assets/LogoUTP.png";
+import market from "../../Assets/market.png";
 import User from "../../Assets/User.png";
 import { IoIosMenu, IoIosArrowDown } from "react-icons/io";
 import { AiOutlineSearch, AiOutlineDollar } from "react-icons/ai";
@@ -44,16 +45,17 @@ const Header = ({ handleMenuClick }) => {
     if (value.trim().length >= 3) {
       try {
         AxiosHeader();
-        const response = await axios.get(`http://localhost:8080/utp-market-api/productos/buscar?nombre=${value}`);
+        const response = await axios.get(
+          `http://localhost:8080/utp-market-api/productos/buscar?nombre=${value}`
+        );
         setSearchResults(response.data);
       } catch (error) {
         console.error("Error al realizar la búsqueda:", error);
-      };
+      }
     } else {
       setSearchResults([]); // Si el término de búsqueda no tiene al menos 3 caracteres, restablecer los resultados de búsqueda a un estado vacío
     }
   };
-  
 
   return (
     <>
@@ -65,16 +67,15 @@ const Header = ({ handleMenuClick }) => {
           <IoIosMenu />
         </div>
         <div className="flex items-center">
-          <img
-            src={LogoUTP}
-            alt=""
-            className=" h-7 hidden md:block ml-20 md:ml-36"
-          />
-          <div className="flex bg-[#EFF5FE] items-center p-2 rounded-xl gap-2 text-lg ml-20 md:ml-8">
+          <div className=" hidden sm:flex ml-20 md:ml-36 items-center">
+            <img src={LogoUTP} alt="" className="h-6 md:h-7"/>
+            <img src={market} alt="" className="h-3 md:h-4"/>
+          </div>
+          <div className="flex bg-[#EFF5FE] items-center p-2 rounded-xl gap-2 text-lg ml-20 sm:ml-4 md:ml-8">
             <input
               type="search"
               placeholder="Buscar producto"
-              className=" w-11 sm:w-28 md:w-72 bg-transparent outline-none text-sm p2 sm:border-r sm:border-r-slate-800"
+              className=" bg-transparent outline-none text-sm p2 sm:border-r sm:border-r-slate-800 w-11 sm:w-40  lg:w-64"
               value={searchTerm}
               onChange={handleSearchChange} // Llamar a la función de búsqueda a medida que se escribe
             />
@@ -86,7 +87,7 @@ const Header = ({ handleMenuClick }) => {
           {isLoading ? (
             <LoadingScreen />
           ) : (
-            <div className="bg-[#EFF5FE] flex items-center justify-center p-2 gap-2 text-sm  md:mr-7">
+            <div className="bg-[#EFF5FE] flex flex-row items-center justify-center p-2 gap-2 text-sm  md:mr-7">
               <span>{totalCoins} coins</span>
               <AiOutlineDollar className="text-lg" />
             </div>

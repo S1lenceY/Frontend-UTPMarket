@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import withSplashScreen from "../Loader/withSplashScreen";
 import LogoLogin from "../Assets/LogoLogin.png";
 import LogoUTP from "../Assets/LogoUTP.png";
+import market from "../Assets/market.png";
 import { HiOutlineEye, HiOutlineEyeOff, HiOutlineMail } from "react-icons/hi";
 import { useAuthContext } from "../Auth/authContext";
 import axios from "axios";
@@ -98,8 +99,9 @@ const Login = () => {
           />
         </div>
         <div className="flex flex-col w-[380px] md:p-2 p-10">
-          <div className="flex h-9 w-[120px]">
-            <img src={LogoUTP} alt="" />
+          <div className="flex items-center">
+            <img src={LogoUTP} alt="" className="h-9"/>
+            <img src={market} alt="" className="h-5"/>
           </div>
           <div className="mt-5">
             <div className="mb-4">
@@ -107,7 +109,7 @@ const Login = () => {
                 La nueva experiencia digital de marketplace
               </p>
               <span className=" text-xl font-light text-subtitlecolor">
-                Agradable, facil y dinámica
+                Agradable, fácil y dinámica
               </span>
             </div>
             <div className="flex flex-col">
