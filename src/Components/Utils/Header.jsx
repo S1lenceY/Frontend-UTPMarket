@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { LOGOUT } from "../../Path/Paths";
 import { Link, useLoaderData } from "react-router-dom";
 import LogoUTP from "../../Assets/LogoUTP.png";
@@ -7,6 +7,9 @@ import { IoIosMenu, IoIosArrowDown } from "react-icons/io";
 import { AiOutlineSearch, AiOutlineDollar } from "react-icons/ai";
 import Dropdown from "./Dropdown";
 import { useCoins } from "../../Auth/CoinsContext";
+import SearchContext from "../../Auth/SearchContext";
+import AxiosHeader from "../../Auth/AxiosHeader";
+import axios from "axios";
 
 function LoadingScreen() {
   return (
@@ -18,6 +21,8 @@ function LoadingScreen() {
 }
 
 const Header = ({ handleMenuClick }) => {
+  //Función para realizar la búsqueda a la API
+  const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -29,6 +34,24 @@ const Header = ({ handleMenuClick }) => {
   }, []);
 
   const { totalCoins } = useCoins();
+  const { setSearchResults } = useContext(SearchContext); // Usa el contexto para establecer los resultados de búsqueda
+
+  const search = async () => {
+    if (searchTerm.trim() === "") {
+      setSearchResults([]); 
+      return; // No hacer nada si el término de búsqueda está vacío
+    }
+
+    AxiosHeader();
+    try {
+      const response = await axios.get(`http://localhost:8080/utp-market-api/productos/buscar?nombre=${searchTerm}`);
+      setSearchResults(response.data);
+    } catch (error) {
+      console.error("Error al realizar la búsqueda:", error);
+    }
+  };
+  
+
   return (
     <>
       <div className="fixed flex md:absolute md:h-20 h-14 w-screen bg-inputbackground items-center justify-between z-10">
@@ -44,11 +67,13 @@ const Header = ({ handleMenuClick }) => {
             alt=""
             className=" h-7 hidden md:block ml-20 md:ml-36"
           />
-          <div className="flex bg-[#EFF5FE] items-center p-2 rounded-xl gap-2 text-lg ml-20 md:ml-8">
+          <div className="flex bg-[#EFF5FE] items-center p-2 rounded-xl gap-2 text-lg ml-20 md:ml-8" onClick={search}>
             <input
               type="search"
               placeholder="Buscar producto"
               className=" w-11 sm:w-28 md:w-72 bg-transparent outline-none text-sm p2 sm:border-r sm:border-r-slate-800"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
             <AiOutlineSearch />
           </div>

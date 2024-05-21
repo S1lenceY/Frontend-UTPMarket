@@ -2,9 +2,20 @@ import React, { useState, useEffect } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiOutlineDollar } from "react-icons/ai";
 import { useLoaderData } from "react-router-dom";
+import { useSearch } from "../Auth/SearchContext";
 import imagenes from "../Path/Imagenes";
 
 const Productos = () => {
+  //Cambiar esto por la recepción de datos que me den en el API
+  const loaderData = useLoaderData();
+  const searchResults = useSearch();
+
+  console.log(searchResults);
+
+  // Determinar qué datos mostrar
+  const data = searchResults.length > 0 ? searchResults : loaderData;
+  console.log(data);
+
   //Añadir precio total al carrito:
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -89,9 +100,6 @@ const Productos = () => {
     setTotalCoins(coins);
     localStorage.setItem("totalCoins", coins);
   };
-
-  //Cambiar esto por la recepción de datos que me den en el API
-  const data = useLoaderData();
 
   // Agrupar productos por categoría
   const groupedProducts = data.reduce((acc, curr) => {
