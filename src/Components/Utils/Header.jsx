@@ -36,18 +36,21 @@ const Header = ({ handleMenuClick }) => {
   const { totalCoins } = useCoins();
   const { setSearchResults } = useContext(SearchContext); // Usa el contexto para establecer los resultados de búsqueda
 
-  const search = async () => {
-    if (searchTerm.trim() === "") {
-      setSearchResults([]); 
-      return; // No hacer nada si el término de búsqueda está vacío
-    }
+  const handleSearchChange = async (e) => {
+    const value = e.target.value;
+    setSearchTerm(value); // Actualizar el término de búsqueda en el estado local
 
-    AxiosHeader();
-    try {
-      const response = await axios.get(`http://localhost:8080/utp-market-api/productos/buscar?nombre=${searchTerm}`);
-      setSearchResults(response.data);
-    } catch (error) {
-      console.error("Error al realizar la búsqueda:", error);
+    // Realizar la búsqueda solo si el término de búsqueda tiene al menos 3 caracteres
+    if (value.trim().length >= 3) {
+      try {
+        AxiosHeader();
+        const response = await axios.get(`http://localhost:8080/utp-market-api/productos/buscar?nombre=${value}`);
+        setSearchResults(response.data);
+      } catch (error) {
+        console.error("Error al realizar la búsqueda:", error);
+      };
+    } else {
+      setSearchResults([]); // Si el término de búsqueda no tiene al menos 3 caracteres, restablecer los resultados de búsqueda a un estado vacío
     }
   };
   
@@ -67,13 +70,13 @@ const Header = ({ handleMenuClick }) => {
             alt=""
             className=" h-7 hidden md:block ml-20 md:ml-36"
           />
-          <div className="flex bg-[#EFF5FE] items-center p-2 rounded-xl gap-2 text-lg ml-20 md:ml-8" onClick={search}>
+          <div className="flex bg-[#EFF5FE] items-center p-2 rounded-xl gap-2 text-lg ml-20 md:ml-8">
             <input
               type="search"
               placeholder="Buscar producto"
               className=" w-11 sm:w-28 md:w-72 bg-transparent outline-none text-sm p2 sm:border-r sm:border-r-slate-800"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={handleSearchChange} // Llamar a la función de búsqueda a medida que se escribe
             />
             <AiOutlineSearch />
           </div>

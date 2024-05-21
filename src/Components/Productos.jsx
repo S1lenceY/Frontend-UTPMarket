@@ -10,11 +10,8 @@ const Productos = () => {
   const loaderData = useLoaderData();
   const searchResults = useSearch();
 
-  console.log(searchResults);
-
   // Determinar qué datos mostrar
   const data = searchResults.length > 0 ? searchResults : loaderData;
-  console.log(data);
 
   //Añadir precio total al carrito:
   const [totalPrice, setTotalPrice] = useState(0);
@@ -78,8 +75,6 @@ const Productos = () => {
     updateTotalPrice(updatedCart);
     updateTotalCoins(updatedCart);
   };
-
-  console.log(cartItems);
 
   // Actualizar el precio total
   const updateTotalPrice = (cart) => {
