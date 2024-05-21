@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { CARRITO } from "../Path/Paths";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiOutlineDollar } from "react-icons/ai";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { useSearch } from "../Auth/SearchContext";
 import imagenes from "../Path/Imagenes";
 
@@ -180,14 +181,15 @@ const Productos = () => {
         </div>
       ))}
 
-      <div
+      <Link
+        to={CARRITO}
         className={`bg-[#000f37] hover:brightness-150  p-3 md:p-4 rounded-full md:rounded-sm text-white flex items-center gap-2 text-sm font-bold fixed right-3 md:right-6 ${
           animate ? "animate-pulse" : ""
         }`}
       >
         S/ {totalPrice.toFixed(1)}
         <MdOutlineShoppingCart className="text-lg" />
-      </div>
+      </Link>
     </>
   );
 };
