@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiOutlineDollar } from "react-icons/ai";
 import { ImHappy } from "react-icons/im";
 import imagenes from "../Path/Imagenes";
 import { useCoins } from "../Auth/CoinsContext";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
+import { useLinkContext } from "../Auth/LinkContext";
+import { CARRITO } from "../Path/Paths";
 
 const Canjear = () => {
-  
+  const { handleLinkClick } = useLinkContext();
+
   //Recibimos los datos de la API
   const data = useLoaderData();
 
@@ -29,7 +32,8 @@ const Canjear = () => {
     const inputValueFloat = parseFloat(inputValues[index].trim());
 
     // Verificar si el valor del input es válido
-    const quantity = !isNaN(inputValueFloat) && inputValueFloat > 0 ? inputValueFloat : 1;
+    const quantity =
+      !isNaN(inputValueFloat) && inputValueFloat > 0 ? inputValueFloat : 1;
 
     // Lógica para abrir modal u otras operaciones necesarias
     setShowModal(true);
@@ -44,22 +48,24 @@ const Canjear = () => {
     const userId = localStorage.getItem("userID");
 
     try {
-      await axios.post('http://localhost:8080/utp-market-api/usuarios/ActualizarCoins', {
-        id: userId,
-        coins: `-${coinsToSubtract}`
-      });
-      console.log('Coins actualizadas con éxito');
+      await axios.post(
+        "http://localhost:8080/utp-market-api/usuarios/ActualizarCoins",
+        {
+          id: userId,
+          coins: `-${coinsToSubtract}`,
+        }
+      );
+      console.log("Coins actualizadas con éxito");
     } catch (error) {
-      console.error('Error al actualizar las coins:', error);
+      console.error("Error al actualizar las coins:", error);
     }
   };
-
 
   const handleCloseModal = () => {
     setShowModal(false);
   };
 
-  const [inputValues, setInputValues] = useState(Array(data.length).fill('')); // Estado para los valores de los inputs
+  const [inputValues, setInputValues] = useState(Array(data.length).fill("")); // Estado para los valores de los inputs
 
   return (
     <>
@@ -119,9 +125,13 @@ const Canjear = () => {
         </div>
       </div>
 
-      <div className="bg-[#000f37] p-4 rounded-full text-white flex items-center gap-2 text-sm font-bold fixed right-2 md:right-16">
+      <Link
+        to={CARRITO}
+        className="bg-[#000f37] hover:brightness-150 p-4 rounded-full text-white flex items-center gap-2 text-sm font-bold fixed right-2 md:right-16"
+        onClick={() => handleLinkClick(CARRITO)}
+      >
         <MdOutlineShoppingCart className="text-lg" />
-      </div>
+      </Link>
 
       <AnimatePresence>
         {showModal && (

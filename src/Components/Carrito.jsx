@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import { IoIosClose } from "react-icons/io";
 import { CiEdit } from "react-icons/ci";
+import { ImSad, ImHappy } from "react-icons/im";
 import VISA from "../Assets/VISA.jpg";
 import PayPal from "../Assets/PayPal.png";
 import Caja from "../Assets/Caja.jpg";
@@ -207,72 +208,84 @@ const Carrito = () => {
         <div className="flex">
           <div className="flex flex-col-reverse md:flex-row gap-3 mt-4">
             <div className="flex flex-col gap-5 max-h-64 md:max-h-[424px] overflow-y-auto scroll self-center md:self-start mt-5 md:mt-0">
-              {productos.map((producto, index) => {
-                const imagen = imagenes.find(
-                  (img) => img.name === producto.nombre
-                );
-                return (
-                  <div
-                    key={index}
-                    className="bg-white text-black rounded-md w-fit flex flex-col lg:flex-row mr-3 relative group"
-                  >
-                    <div
-                      className="absolute right-2 top-2 opacity-0 text-2xl group-hover:opacity-100 transition-all cursor-pointer text-[#000f37]"
-                      onClick={() => handleRemoveProduct(index)}
-                    >
-                      <IoIosClose />
-                    </div>
-                    <div
-                      className="absolute right-8 top-3 opacity-0 group-hover:opacity-100 transition-all cursor-pointer text-[#000f37]"
-                      onClick={() => handleEditProduct(index)}
-                    >
-                      <CiEdit />
-                    </div>
-                    <div className="flex flex-col lg:flex-row">
-                      <img
-                        src={imagen ? imagen.url : ""}
-                        className="rounded-t-md md:rounded-s-md w-64 h-32"
-                        alt={producto.nombre}
-                      />
-                      <div className="bg-yellow-200 h-2 w-full lg:h-full lg:w-2"></div>
-                    </div>
-                    <div className="flex flex-col mt-2 justify-between p-3 px-5 w-full lg:w-80">
-                      <div className="flex flex-col">
-                        <span className="font-bold">{producto.nombre}</span>
-                        <span className="text-sm">
-                          Producto de {producto.id_category}
-                        </span>
-                      </div>
-                      <div className="flex gap-3 self-end mt-5">
-                        {editingProductIndex === index ? (
-                          <input
-                            type="number"
-                            value={newQuantity}
-                            onChange={(e) => setNewQuantity(e.target.value)}
-                            className="text-sm bg-slate-300 p-1.5 w-14 outline-none"
-                            min={1}
-                          />
-                        ) : (
-                          <span className="text-sm bg-slate-300 p-1.5 flex items-center gap-1">
-                            {producto.cantidad} unidades
-                          </span>
-                        )}
-                        <span className="bg-[#000f37] text-white rounded-sm p-1.5 text-sm">
-                          S/ {producto.precio}
-                        </span>
-                        {editingProductIndex === index && (
-                          <button
-                            onClick={() => handleSaveEdit(index)}
-                            className="bg-green-500 text-white rounded-sm p-1.5 text-sm"
-                          >
-                            ✔
-                          </button>
-                        )}
-                      </div>
-                    </div>
+              {productos.length === 0 ? (
+                <div className="flex flex-col justify-center items-center w-full max-w-96 h-96 bg-[#c2c5fc] text-slate-700 p-10">
+                  <span className="text-3xl font-bold">¡Ups!</span>
+                  <p className="text-center mt-2 mb-3">
+                    <b>Parece que no has añadido nada a tu carrito.</b> ¡Hecha un vistazo a nuestros productos!
+                  </p>
+                  <div className="text-4xl">
+                    <ImHappy />
                   </div>
-                );
-              })}
+                </div>
+              ) : (
+                productos.map((producto, index) => {
+                  const imagen = imagenes.find(
+                    (img) => img.name === producto.nombre
+                  );
+                  return (
+                    <div
+                      key={index}
+                      className="bg-white text-black rounded-md w-fit flex flex-col lg:flex-row mr-3 relative group"
+                    >
+                      <div
+                        className="absolute right-2 top-2 opacity-0 text-2xl group-hover:opacity-100 transition-all cursor-pointer text-[#000f37]"
+                        onClick={() => handleRemoveProduct(index)}
+                      >
+                        <IoIosClose />
+                      </div>
+                      <div
+                        className="absolute right-8 top-3 opacity-0 group-hover:opacity-100 transition-all cursor-pointer text-[#000f37]"
+                        onClick={() => handleEditProduct(index)}
+                      >
+                        <CiEdit />
+                      </div>
+                      <div className="flex flex-col lg:flex-row">
+                        <img
+                          src={imagen ? imagen.url : ""}
+                          className="rounded-t-md md:rounded-s-md w-64 h-32"
+                          alt={producto.nombre}
+                        />
+                        <div className="bg-yellow-200 h-2 w-full lg:h-full lg:w-2"></div>
+                      </div>
+                      <div className="flex flex-col mt-2 justify-between p-3 px-5 w-full lg:w-80">
+                        <div className="flex flex-col">
+                          <span className="font-bold">{producto.nombre}</span>
+                          <span className="text-sm">
+                            Producto de {producto.id_category}
+                          </span>
+                        </div>
+                        <div className="flex gap-3 self-end mt-5">
+                          {editingProductIndex === index ? (
+                            <input
+                              type="number"
+                              value={newQuantity}
+                              onChange={(e) => setNewQuantity(e.target.value)}
+                              className="text-sm bg-slate-300 p-1.5 w-14 outline-none"
+                              min={1}
+                            />
+                          ) : (
+                            <span className="text-sm bg-slate-300 p-1.5 flex items-center gap-1">
+                              {producto.cantidad} unidades
+                            </span>
+                          )}
+                          <span className="bg-[#000f37] text-white rounded-sm p-1.5 text-sm">
+                            S/ {producto.precio}
+                          </span>
+                          {editingProductIndex === index && (
+                            <button
+                              onClick={() => handleSaveEdit(index)}
+                              className="bg-green-500 text-white rounded-sm p-1.5 text-sm"
+                            >
+                              ✔
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
             </div>
             <div className="flex flex-col">
               <div className="bg-white px-10 py-7 ">
@@ -309,12 +322,13 @@ const Carrito = () => {
                 <input
                   type="text"
                   placeholder="UTP-CIX-24"
-                  className="py-2 md:p-2 px-3 outline-none border w-[197px] "
+                  className=" outline-none border w-full p-2"
                   value={couponCode}
                   onChange={(e) => setCouponCode(e.target.value)}
+                  
                 />
                 <div
-                  className="flex items-center px-2 md:p-2 md:px-4 bg-slate-300 text-slate-500 font-bold border cursor-pointer hover:bg-gray-300"
+                  className="flex justify-center items-center bg-slate-300 text-slate-500 font-bold border cursor-pointer hover:bg-[#c2c5fc] w-full max-w-32"
                   onClick={handleCouponClick}
                 >
                   Canjear cupón

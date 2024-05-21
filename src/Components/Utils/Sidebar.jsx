@@ -9,8 +9,11 @@ import ThemeButton from "../Utils/ThemeButton";
 import Header from "./Header";
 import { Link } from "react-router-dom";
 import { INICIO, PRODUCTOS, CANJEAR, CARRITO } from "../../Path/Paths";
+import { useLinkContext } from "../../Auth/LinkContext";
 
 const Sidebar = () => {
+  const { selectedLink, handleLinkClick, topOffset } = useLinkContext();
+
   // Estado para controlar la visibilidad del sidebar
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
@@ -24,42 +27,6 @@ const Sidebar = () => {
     setSidebarVisible(false);
   };
 
-  //Variable y Estado para la linea roja y el background
-  const [selectedLink, setSelectedLink] = useState(null);
-  const [topOffset, setTopOffset] = useState(0);
-
-  const handleLinkClick = (link) => {
-    setSelectedLink(link);
-    localStorage.setItem("selectedLink", link);
-  };
-
-  useEffect(() => {
-    const storedLink = localStorage.getItem("selectedLink");
-    if (storedLink) {
-      setSelectedLink(storedLink); // Establecer el estado desde localStorage al cargar la página
-    }
-  }, []);
-
-  useEffect(() => {
-    // Calcular el desplazamiento del div rojo
-    const updateTopOffset = () => {
-      if (selectedLink) {
-        const selectedLinkElement = document.getElementById(selectedLink);
-        if (selectedLinkElement) {
-          setTopOffset(selectedLinkElement.offsetTop);
-        }
-      }
-    };
-
-    updateTopOffset();
-
-    // Recalcular el desplazamiento del div rojo cuando cambia el tamaño de la ventana
-    window.addEventListener("resize", updateTopOffset);
-
-    return () => {
-      window.removeEventListener("resize", updateTopOffset);
-    };
-  }, [selectedLink]);
 
   return (
     <>

@@ -4,9 +4,11 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiOutlineDollar } from "react-icons/ai";
 import { Link, useLoaderData } from "react-router-dom";
 import { useSearch } from "../Auth/SearchContext";
+import { useLinkContext } from "../Auth/LinkContext";
 import imagenes from "../Path/Imagenes";
 
 const Productos = () => {
+  const { handleLinkClick } = useLinkContext();
   //Cambiar esto por la recepción de datos que me den en el API
   const loaderData = useLoaderData();
   const searchResults = useSearch();
@@ -186,6 +188,7 @@ const Productos = () => {
         className={`bg-[#000f37] hover:brightness-150  p-3 md:p-4 rounded-full md:rounded-sm text-white flex items-center gap-2 text-sm font-bold fixed right-3 md:right-6 ${
           animate ? "animate-pulse" : ""
         }`}
+        onClick={() => handleLinkClick(CARRITO)}
       >
         S/ {totalPrice.toFixed(1)}
         <MdOutlineShoppingCart className="text-lg" />
