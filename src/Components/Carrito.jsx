@@ -229,13 +229,13 @@ const Carrito = () => {
                       className="bg-bgcard text-textcard rounded-md w-fit flex flex-col lg:flex-row mr-3 relative group"
                     >
                       <div
-                        className="absolute right-2 top-2 opacity-0 text-2xl group-hover:opacity-100 transition-all cursor-pointer text-coloricons"
+                        className="absolute right-2 top-2 opacity-70 md:opacity-0 md:group-hover:opacity-100 text-2xl transition-all cursor-pointer text-coloricons"
                         onClick={() => handleRemoveProduct(index)}
                       >
                         <IoIosClose />
                       </div>
                       <div
-                        className="absolute right-8 top-3 opacity-0 group-hover:opacity-100 transition-all cursor-pointer text-coloricons"
+                        className="absolute right-8 top-3 opacity-70 md:opacity-0 md:group-hover:opacity-100 transition-all cursor-pointer text-coloricons"
                         onClick={() => handleEditProduct(index)}
                       >
                         <CiEdit />
