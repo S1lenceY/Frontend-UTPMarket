@@ -3,7 +3,7 @@ import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiOutlineDollar } from "react-icons/ai";
-import { ImHappy } from "react-icons/im";
+import { ImHappy, ImSad } from "react-icons/im";
 import imagenes from "../Path/Imagenes";
 import { useCoins } from "../Auth/CoinsContext";
 import { useLoaderData, Link } from "react-router-dom";
@@ -17,8 +17,11 @@ const Canjear = () => {
   const data = useLoaderData();
 
   const { totalCoins, updateTotalCoins } = useCoins();
+
   //Para abrir modal
   const [showModal, setShowModal] = useState(false);
+
+  const [modalContent, setModalContent] = useState(null);
 
   const handleCanjear = (coinsToSubtract) => {
     // Lógica para restar las monedas canjeadas del total de monedas
@@ -35,11 +38,38 @@ const Canjear = () => {
     const quantity =
       !isNaN(inputValueFloat) && inputValueFloat > 0 ? inputValueFloat : 1;
 
-    // Lógica para abrir modal u otras operaciones necesarias
-    setShowModal(true);
-
     // Calcular las monedas a canjear
     const coinsToSubtract = quantity * d.coinCanje;
+
+    if (totalCoins >= coinsToSubtract) {
+      handleCanjear(coinsToSubtract);
+      setModalContent(
+        <div className="flex flex-col items-center justify-center w-72 text-bgtexttitle">
+          <span className="text-2xl font-bold">¡Genial!</span>
+          <p className="text-center mt-1.5 mb-3">
+            Ahora puedes <b>reclamar</b> tu <b>producto</b> en cualquier{" "}
+            <b>cafetería</b> de UTP+ market brindando tu código <b>UTP</b>.
+          </p>
+          <div className="text-4xl">
+            <ImHappy />
+          </div>
+        </div>
+      );
+    } else {
+      setModalContent(
+        <div className="flex flex-col items-center justify-center w-72 text-bgtexttitle">
+          <span className="text-2xl font-bold">¡Lo siento!</span>
+          <p className="text-center mt-1.5 mb-3">
+            No tienes suficientes <b>coins</b>, compra más <b>productos</b>.
+          </p>
+          <div className="text-4xl">
+            <ImSad />
+          </div>
+        </div>
+      );
+    }
+
+    setShowModal(true);
 
     // Llamar a la función para restar las monedas
     handleCanjear(coinsToSubtract);
@@ -156,17 +186,7 @@ const Canjear = () => {
               }}
             >
               <div className=" w-fit flex transform overflow-hidden rounded bg-bgmodal p-5 text-left align-middle shadow-xl transition-all">
-                <div className="flex flex-col items-center justify-center w-72 text-bgtexttitle">
-                  <span className="text-2xl font-bold">¡Genial!</span>
-                  <p className="text-center mt-1.5 mb-3">
-                    Ahora puedes <b>reclamar</b> tu <b>producto</b> en cualquier{" "}
-                    <b>cafetería</b> de UTP+ market brindando tu código{" "}
-                    <b>UTP</b>.
-                  </p>
-                  <div className="text-4xl">
-                    <ImHappy />
-                  </div>
-                </div>
+                {modalContent}
               </div>
             </motion.div>
           </motion.div>
