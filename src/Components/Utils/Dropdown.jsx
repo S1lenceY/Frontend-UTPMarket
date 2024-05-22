@@ -37,14 +37,14 @@ const Dropdown = () => {
           aria-haspopup="true"
         >
           <IoIosArrowDown
-            className={`w-5 h-5 ${isOpen ? "transform rotate-180" : ""}`}
+            className={`w-5 h-5 text-titlecolor ${isOpen ? "transform rotate-180" : ""}`}
           />
         </button>
       </div>
 
       {isOpen && (
         <div
-          className="absolute w-32 right-2 md:right-8 mt-3 bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          className="absolute w-32 right-2 md:right-8 mt-3 bg-bglogout divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="options-menu"
@@ -52,7 +52,7 @@ const Dropdown = () => {
           <div className="py-1">
             <Link
               to={LOGOUT}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              className="block px-4 py-2 text-sm text-textcard hover:bg-bghoverlogout"
               role="menuitem"
             >
              

@@ -105,7 +105,7 @@ const BestProducts = () => {
             return (
               <div
                 key={index}
-                className="bg-white text-black rounded-md w-72 mr-5"
+                className="bg-bgcard text-textcard rounded-md w-72 mr-5"
               >
                 <img
                   src={imagen ? imagen.url : ""}
@@ -113,16 +113,16 @@ const BestProducts = () => {
                   className="rounded-t-md w-full h-32"
                 />
                 <div className=" bg-[#F9CA29] w-full h-3"></div>
-                <div className="flex mt-2 justify-between px-5 items-center">
+                <div className="flex mt-3 justify-between px-5 items-center">
                   <div className="flex flex-col">
                     <span className="font-bold">{d.name}</span>
                     <span className="text-sm">{d.id_category}</span>
                   </div>
                   <div className="flex gap-3">
-                    <span className="bg-[#EFF5FE] p-1.5 text-sm text-[#434A5D]">
+                    <span className="bg-bgcardlabel p-1.5 text-sm text-textcard">
                       S/ {d.price}
                     </span>
-                    <span className="text-sm bg-[#EFF5FE] p-1.5 flex items-center gap-1 text-[#434A5D]">
+                    <span className="text-sm bg-bgcardlabel p-1.5 flex items-center gap-1 text-textcard">
                       {d.coin}
                       <AiOutlineDollar />
                     </span>
@@ -132,11 +132,11 @@ const BestProducts = () => {
                   <input
                     type="number"
                     id={`quantity_${d.id}`}
-                    className="w-12 outline-none p-1.5 bg-[#EFF5FE] rounded-md "
+                    className="w-12 outline-none p-1.5 bg-bgcardlabel rounded-md text-center translate-x-2"
                     min={1} // Establece el valor mínimo como 1
                     placeholder="1"
                   />
-                  <button className="bg-[#000F37] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition" onClick={() => handleAddToCart(d)}>
+                  <button className="bg-bgbuttoncard border-2 border-borderbuttoncard rounded-md text-white px-3 py-1 text-xs hover:border-bgcard cursor-pointer transition" onClick={() => handleAddToCart(d)}>
                     Agregar al carrito
                   </button>
                 </div>

@@ -202,8 +202,8 @@ const Carrito = () => {
   return (
     <>
       <div className="flex flex-col">
-        <div className="bg-white p-3 text-lg md:p-3 md:text-2xl gap-2">
-          <span>|</span> Carrito de Compras
+        <div className="bg-bgtitle text-bgtexttitle p-3 text-lg md:p-3 md:text-2xl gap-2">
+          <span>|</span><b> Carrito</b> de Compras
         </div>
         <div className="flex">
           <div className="flex flex-col-reverse md:flex-row gap-3 mt-4">
@@ -226,16 +226,16 @@ const Carrito = () => {
                   return (
                     <div
                       key={index}
-                      className="bg-white text-black rounded-md w-fit flex flex-col lg:flex-row mr-3 relative group"
+                      className="bg-bgcard text-textcard rounded-md w-fit flex flex-col lg:flex-row mr-3 relative group"
                     >
                       <div
-                        className="absolute right-2 top-2 opacity-0 text-2xl group-hover:opacity-100 transition-all cursor-pointer text-[#000f37]"
+                        className="absolute right-2 top-2 opacity-0 text-2xl group-hover:opacity-100 transition-all cursor-pointer text-coloricons"
                         onClick={() => handleRemoveProduct(index)}
                       >
                         <IoIosClose />
                       </div>
                       <div
-                        className="absolute right-8 top-3 opacity-0 group-hover:opacity-100 transition-all cursor-pointer text-[#000f37]"
+                        className="absolute right-8 top-3 opacity-0 group-hover:opacity-100 transition-all cursor-pointer text-coloricons"
                         onClick={() => handleEditProduct(index)}
                       >
                         <CiEdit />
@@ -261,15 +261,15 @@ const Carrito = () => {
                               type="number"
                               value={newQuantity}
                               onChange={(e) => setNewQuantity(e.target.value)}
-                              className="text-sm bg-slate-300 p-1.5 w-14 outline-none"
+                              className="text-sm bg-bgedit text-center p-1.5 w-10 outline-none"
                               min={1}
                             />
                           ) : (
-                            <span className="text-sm bg-slate-300 p-1.5 flex items-center gap-1">
+                            <span className="text-sm bg-bgcardlabel p-1.5 flex items-center gap-1">
                               {producto.cantidad} unidades
                             </span>
                           )}
-                          <span className="bg-[#000f37] text-white rounded-sm p-1.5 text-sm">
+                          <span className="bg-bgcardlabel rounded-sm p-1.5 text-sm">
                             S/ {producto.precio}
                           </span>
                           {editingProductIndex === index && (
@@ -288,11 +288,11 @@ const Carrito = () => {
               )}
             </div>
             <div className="flex flex-col">
-              <div className="bg-white px-10 py-7 ">
-                <div className="border-b border-b-black">
+              <div className="bg-bgcard text-textcard px-10 py-7 ">
+                <div className="border-b border-b-textcard">
                   <span className="text-xl font-bold ">Datos Generales</span>
                 </div>
-                <div className="flex flex-col text-sm py-3 border-b border-b-black">
+                <div className="flex flex-col text-sm py-3 border-b border-b-textcard">
                   <span>
                     <b>Subtotal: </b>S/{totalPrice.toFixed(2)}
                   </span>
@@ -303,7 +303,7 @@ const Carrito = () => {
                     <b>Descuento por cupón: </b>S/{discount}
                   </span>
                 </div>
-                <div className="flex flex-col text-sm py-3 border-b border-b-black">
+                <div className="flex flex-col text-sm py-3 border-b border-b-textcard">
                   <span>
                     <b>Coins Ganadas: </b>
                     {totalCoinsGanadas}
@@ -312,7 +312,7 @@ const Carrito = () => {
                     <b>Lugar de Recepción: </b>UTP Sede Chiclayo
                   </span>
                 </div>
-                <div className="flex flex-col text-sm py-3 border-b border-b-black">
+                <div className="flex flex-col text-sm py-3 border-b border-b-textcard">
                   <span>
                     <b>Total a pagar: </b>S/{totalPagar.toFixed(2)}
                   </span>
@@ -322,20 +322,20 @@ const Carrito = () => {
                 <input
                   type="text"
                   placeholder="UTP-CIX-24"
-                  className=" outline-none border w-full p-2"
+                  className="bg-bginputcupon text-textcard outline-none border border-bordercupon w-full p-2"
                   value={couponCode}
                   onChange={(e) => setCouponCode(e.target.value)}
                   
                 />
                 <div
-                  className="flex justify-center items-center bg-slate-300 text-slate-500 font-bold border cursor-pointer hover:bg-[#c2c5fc] w-full max-w-32"
+                  className="flex justify-center items-center bg-bgcuponbutton text-textcuponbutton font-bold border border-bordercupon cursor-pointer hover:bg-bghovercupon w-full max-w-32"
                   onClick={handleCouponClick}
                 >
                   Canjear cupón
                 </div>
               </div>
               <button
-                className={`w-full bg-[#000f37] text-white mt-3 p-2 rounded font-bold text-sm ${
+                className={`w-full bg-bgprocesar text-white mt-3 p-2 rounded font-bold text-sm ${
                   productos.length === 0 ? "cursor-not-allowed opacity-50" : ""
                 }`}
                 onClick={handleButtonClick}
@@ -368,10 +368,10 @@ const Carrito = () => {
                 {isLoading ? (
                   <div className="flex flex-col items-center justify-center p-3">
                     <div className="animate-spin ease-linear rounded-full w-10 h-10 border-t-2 border-b-2 border-blue-500"></div>
-                    <h2 className="text-zinc-900 mt-4 font-bold text-xl">
+                    <h2 className="text-bgtexttitle mt-4 font-bold text-xl">
                       Procesando...
                     </h2>
-                    <p className="text-zinc-600 mt-1">
+                    <p className="text-bgsubtitlemodal mt-1">
                       Porfavor no cierre esta ventana
                     </p>
                   </div>
@@ -381,13 +381,13 @@ const Carrito = () => {
                       <img src={Logo} className="w-72" />
                     </div>
                     <div className="flex flex-col ml-4">
-                      <div className="bg-white p-3 text-lg md:p-3 md:text-2xl gap-2 flex font-bold">
+                      <div className="bg-bgtitle text-bgtexttitle p-3 text-lg md:p-3 md:text-2xl gap-2 flex font-bold">
                         <span>|</span> Métodos de Pago
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
                         {pago.map((p, index) => (
                           <div
-                            className="bg-white text-black rounded-md w-fit flex flex-col m-3"
+                            className="bg-bgtitle text-bgtexttitle rounded-md w-fit flex flex-col m-3"
                             key={index}
                           >
                             <div className="flex flex-col">
@@ -404,7 +404,7 @@ const Carrito = () => {
                               </div>
                               <div className="self-end">
                                 <button
-                                  className="p-1 px-3 rounded text-white text-sm bg-[#000f37]"
+                                  className="p-1 px-3 rounded text-white text-sm bg-bgbuttoncard"
                                   onClick={handlePurchase}
                                 >
                                   Elegir
@@ -413,7 +413,7 @@ const Carrito = () => {
                             </div>
                           </div>
                         ))}
-                        <div className="bg-white text-black rounded-md w-fit flex flex-col m-3">
+                        <div className="bg-bgtitle text-bgtexttitle  rounded-md w-fit flex flex-col m-3">
                           <div className="flex flex-col">
                             <img
                               src={Caja}
@@ -428,7 +428,7 @@ const Carrito = () => {
                             </div>
                             <div className="self-end">
                               <button
-                                className="p-1 px-3 rounded text-white text-sm bg-[#000f37]"
+                                className="p-1 px-3 rounded text-white text-sm bg-bgbuttoncard"
                                 onClick={() => {
                                   handleButtonPayClick();
                                   handleCloseModal();

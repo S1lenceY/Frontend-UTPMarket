@@ -70,7 +70,7 @@ const Canjear = () => {
   return (
     <>
       <div className="flex flex-col">
-        <div className="bg-white p-3 text-lg md:p-3 md:text-2xl gap-2 flex font-bold">
+        <div className="bg-bgtitle text-bgtexttitle p-3 text-lg md:p-3 md:text-2xl gap-2 flex font-bold">
           <span>|</span> Canjea tus UTP coins
         </div>
 
@@ -79,19 +79,22 @@ const Canjear = () => {
             // Buscar la imagen correspondiente al nombre del producto
             const imagen = imagenes.find((img) => img.name === d.name);
             return (
-              <div key={index} className="bg-white text-black rounded-md w-72">
+              <div
+                key={index}
+                className="bg-bgcard text-textcard rounded-md w-72"
+              >
                 <img
                   src={imagen ? imagen.url : ""}
                   alt={d.name}
                   className="rounded-t-md w-full h-32"
                 />
                 <div className=" bg-yellow-200 w-full h-3"></div>
-                <div className="flex mt-2 justify-between px-5 items-center">
+                <div className="flex mt-3 justify-between px-5 items-center">
                   <div className="flex flex-col">
                     <span className="font-bold">{d.name}</span>
                   </div>
                   <div className="flex gap-3">
-                    <span className="text-sm bg-[#EFF5FE] p-1.5 flex items-center gap-1 text-[#434A5D]">
+                    <span className="text-sm bg-bgcardlabel p-1.5 flex items-center gap-1 text-textcard">
                       {d.coinCanje}
                       <AiOutlineDollar />
                     </span>
@@ -100,7 +103,7 @@ const Canjear = () => {
                 <div className="flex justify-between p-4">
                   <input
                     type="number"
-                    className="w-12 outline-none p-1.5 bg-[#EFF5FE] rounded-md"
+                    className="w-12 outline-none p-1.5 bg-bgcardlabel rounded-md translate-x-2 text-center"
                     placeholder="1"
                     min={1}
                     value={inputValues[index]} // Usar el valor del estado correspondiente al índice
@@ -111,7 +114,7 @@ const Canjear = () => {
                     }}
                   />
                   <button
-                    className="bg-[#000F37] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition"
+                    className="bg-bgbuttoncard border-2 border-borderbuttoncard rounded-md text-white px-7 py-1 text-xs hover:border-bgcard  cursor-pointer transition"
                     onClick={() => {
                       handleButtonClick(index, d); // Pasar el índice y el objeto d como argumento
                     }}
@@ -127,7 +130,7 @@ const Canjear = () => {
 
       <Link
         to={CARRITO}
-        className="bg-[#000f37] hover:brightness-150 p-4 rounded-full text-white flex items-center gap-2 text-sm font-bold fixed right-2 md:right-16"
+        className="bg-backgroundsidebar hover:brightness-150 p-4 rounded-full text-white flex items-center gap-2 text-sm font-bold fixed right-2 md:right-16"
         onClick={() => handleLinkClick(CARRITO)}
       >
         <MdOutlineShoppingCart className="text-lg" />
@@ -144,7 +147,7 @@ const Canjear = () => {
             transition={{ duration: 0.3 }}
           >
             <motion.div
-              className="flex w-fit h-fit bg-transparent text-white"
+              className="flex w-fit h-fit bg-transparent"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
@@ -152,12 +155,13 @@ const Canjear = () => {
                 e.stopPropagation();
               }}
             >
-              <div className="w-fit flex transform overflow-hidden rounded bg-background p-5 text-left align-middle shadow-xl transition-all text-black">
-                <div className="flex flex-col items-center justify-center w-72">
-                  <span className="text-xl font-bold">¡Genial!</span>
-                  <p className="text-center mt-2 mb-3">
-                    Ahora puedes reclamar tu compra en cualquier cafetería de
-                    UTP+ market brindando tu código UTP.
+              <div className=" w-fit flex transform overflow-hidden rounded bg-bgmodal p-5 text-left align-middle shadow-xl transition-all">
+                <div className="flex flex-col items-center justify-center w-72 text-bgtexttitle">
+                  <span className="text-2xl font-bold">¡Genial!</span>
+                  <p className="text-center mt-1.5 mb-3">
+                    Ahora puedes <b>reclamar</b> tu <b>producto</b> en cualquier{" "}
+                    <b>cafetería</b> de UTP+ market brindando tu código{" "}
+                    <b>UTP</b>.
                   </p>
                   <div className="text-4xl">
                     <ImHappy />

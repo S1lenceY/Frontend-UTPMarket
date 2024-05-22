@@ -28,7 +28,7 @@ const PayModal = ({ showModalPay, setShowModalPay, setProductos, setTotalCoinsGa
           transition={{ duration: 0.3 }}
         >
           <motion.div
-            className="flex w-fit h-fit bg-transparent text-white"
+            className="flex w-fit h-fit bg-transparent"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
@@ -36,12 +36,12 @@ const PayModal = ({ showModalPay, setShowModalPay, setProductos, setTotalCoinsGa
               e.stopPropagation();
             }}
           >
-            <div className="w-fit flex transform overflow-hidden rounded bg-background p-5 text-left align-middle shadow-xl transition-all text-black">
-              <div className="flex flex-col items-center justify-center w-72">
-                <span className="text-xl font-bold">¡Genial!</span>
-                <p className="text-center mt-2 mb-3">
-                  Ahora puedes reclamar tu compra en cualquier cafetería de UTP+
-                  market brindando tu código UTP.
+            <div className=" w-fit flex transform overflow-hidden rounded bg-bgmodal p-5 text-left align-middle shadow-xl transition-all">
+              <div className="flex flex-col items-center justify-center w-72 text-bgtexttitle">
+                <span className="text-2xl font-bold">¡Genial!</span>
+                <p className="text-center mt-1.5 mb-3">
+                  Ahora puedes <b>reclamar</b> tu <b>compra</b> en cualquier <b>cafetería</b> de UTP+
+                  market brindando tu código <b>UTP</b>.
                 </p>
                 <div className="text-4xl">
                   <ImHappy />

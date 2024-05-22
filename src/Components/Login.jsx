@@ -166,7 +166,7 @@ const Login = () => {
 
                 <div className="flex justify-center md:justify-start">
                   <button
-                    className="cursor-pointer w-full md:w-28 h-10 text-sm bg-gray-700 text-white rounded-md hover:bg-gray-800 hover:shadow-lg transition-all group focus:w-10 focus:h-10 focus:rounded-full focus:duration-300 ease-in-out"
+                    className="cursor-pointer w-full md:w-28 h-10 text-sm bg-loginbutton text-white rounded-md hover:bg-loginbuttonhover hover:shadow-lg transition-all group focus:w-10 focus:h-10 focus:rounded-full focus:duration-300 ease-in-out"
                     type="submit"
                   >
                     <svg

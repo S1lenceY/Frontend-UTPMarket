@@ -128,7 +128,7 @@ const Productos = () => {
     <>
       {Object.entries(groupedProducts).map(([category, products]) => (
         <div key={category} className="flex flex-col mb-4">
-          <div className="bg-white p-3 text-lg md:p-3 md:text-2xl gap-2 flex font-bold">
+          <div className="bg-bgtitle text-bgtexttitle p-3 text-lg md:p-3 md:text-2xl gap-2 flex font-bold">
             <span>|</span> {category}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4 gap-8">
@@ -138,7 +138,7 @@ const Productos = () => {
               return (
                 <div
                   key={index}
-                  className="bg-white text-black rounded-md w-72"
+                  className="bg-bgcard text-textcard rounded-md w-72"
                 >
                   <img
                     src={imagen ? imagen.url : ""}
@@ -146,16 +146,16 @@ const Productos = () => {
                     className="rounded-t-md w-full h-32"
                   />
                   <div className=" bg-yellow-200 w-full h-3"></div>
-                  <div className="flex mt-2 justify-between px-5 items-center">
+                  <div className="flex mt-3 justify-between px-5 items-center">
                     <div className="flex flex-col">
                       <span className="font-bold">{product.name}</span>
                       <span className="text-sm">{product.id_category}</span>
                     </div>
                     <div className="flex gap-3">
-                      <span className="bg-[#EFF5FE] p-1.5 text-sm text-[#434A5D]">
+                      <span className="bg-bgcardlabel p-1.5 text-sm text-textcard">
                         S/ {product.price}
                       </span>
-                      <span className="text-sm bg-[#EFF5FE] p-1.5 flex items-center gap-1 text-[#434A5D]">
+                      <span className="text-sm bg-bgcardlabel p-1.5 flex items-center gap-1 text-textcard">
                         {product.coin}
                         <AiOutlineDollar />
                       </span>
@@ -165,12 +165,12 @@ const Productos = () => {
                     <input
                       type="number"
                       id={`quantity_${product.id}`}
-                      className="w-12 outline-none p-1.5 bg-[#EFF5FE] rounded-md "
+                      className="w-12 outline-none p-1.5 bg-bgcardlabel rounded-md translate-x-2 text-center"
                       min={1} // Establece el valor mínimo como 1
                       placeholder="1"
                     />
                     <button
-                      className="bg-[#000F37] border-2 border-[#3e3e3e] rounded-lg text-white px-3 py-1 text-xs hover:border-[#fff] cursor-pointer transition "
+                      className="bg-bgbuttoncard border-2 border-borderbuttoncard rounded-md text-white px-3 py-1 text-xs hover:border-bgcard cursor-pointer transition "
                       onClick={() => handleAddToCart(product)}
                     >
                       Agregar al carrito
@@ -185,7 +185,7 @@ const Productos = () => {
 
       <Link
         to={CARRITO}
-        className={`bg-[#000f37] hover:brightness-150  p-3 md:p-4 rounded-full md:rounded-sm text-white flex items-center gap-2 text-sm font-bold fixed right-3 md:right-6 ${
+        className={`bg-backgroundsidebar hover:brightness-150  p-3 md:p-4 rounded-full md:rounded-sm text-white flex items-center gap-2 text-sm font-bold fixed right-3 md:right-6 ${
           animate ? "animate-pulse" : ""
         }`}
         onClick={() => handleLinkClick(CARRITO)}

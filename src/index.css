@@ -2,20 +2,132 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"] {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield !important;
+  }
+}
+
+*{
+  @apply transition-colors duration-200;
+}
+
 .light {
-    --background: 239 245 254;
-    --titlecolor: 62, 69, 88;
-    --subtitlecolor: 67, 74, 93;
-    --hoverbordercolor: 99 99 246;
-    --bordercolor: 148 163 184;
-    --inputbackground: 255 255 255;
+  /* Login */
+
+  --background: 239 245 254;
+  --titlecolor: 62, 69, 88;
+  --subtitlecolor: 67, 74, 93;
+  --hoverbordercolor: 99 99 246;
+  --bordercolor: 148 163 184;
+  --inputbackground: 255 255 255;
+  --loginbutton: 55 65 81;
+  --loginbuttonhover: 31 41 55;
+
+  /* Sidebar */
+
+  --textsidebar: 0 15 55;
+  --backgroundsidebar: 0 15 55;
+  --sidebarlinecolor: 249 76 97;
+  --divisorsidebar: 23 37 84;
+
+  /* Header */
+
+  --backgroundheader: 255 255 255;
+  --bgheaderlabel: 239 245 254;
+  --headertext: 51 65 85;
+  --headerline: 110 116 139;
+  --bglogout: 255 255 255;
+  --bghoverlogout: 243 244 246;
+
+  /* Titulos */
+
+  --bgtitle: 255 255 255;
+  --bgtexttitle: 62 69 88;
+
+  /* Tarjetas */
+
+  --bgcard: 255 255 255;
+  --textcard: 62 69 89;
+  --bgcardlabel: 239 245 254;
+  --bgbuttoncard: 0 15 55;
+  --borderbuttoncard: 26 39 75;
+
+  /* Carrito */
+
+  --bgcardprice: 0 15 55;
+  --coloricons: 0 15 55;
+  --bordercupon: 229 231 235;
+  --bgcuponbutton: 203 213 225;
+  --textcuponbutton: 100 116 139;
+  --bginputcupon: 255 255 255;
+  --bghovercupon: 194 197 254;
+  --bgprocesar: 0 15 55;
+  --bgedit: 203 213 225;
+
+  /* Modal */
+  --bgsubtitlemodal: 82 82 91;
+  --bgmodal: 239 245 254;
 }
 
 .dark {
-    --background: 44 44 45;
-    --titlecolor: 250 250 250;
-    --subtitlecolor: 99 102 241;
-    --hoverbordercolor: 99 99 246;
-    --bordercolor: 78 80 82;
-    --inputbackground: 64 60 68;
+  /* Login */
+
+  --background: 25 28 49;
+  --titlecolor: 250 250 250;
+  --subtitlecolor: 146 146 249;
+  --hoverbordercolor: 99 99 246;
+  --bordercolor: 81 83 107;
+  --inputbackground: 25 28 49;
+  --loginbutton: 89 89 221;
+  --loginbuttonhover: 99 99 206;
+
+  /* Sidebar */
+
+  --textsidebar: 255 255 255;
+  --backgroundsidebar: 37 41 69;
+  --sidebarlinecolor: 249 76 97;
+  --divisorsidebar: 25 28 49;
+
+  /* Header */
+
+  --backgroundheader: 37 41 69;
+  --bgheaderlabel: 25 28 49;
+  --headertext: 255 255 255;
+  --headerline: 25 28 49;
+  --bglogout: 37 41 69;
+  --bghoverlogout: 25 28 49;
+
+  /* Inicio */
+
+  --bgtitle: 37 41 69;
+  --bgtexttitle: 255 255 255;
+
+  /* Tarjetas */
+
+  --bgcard: 37 41 69;
+  --textcard: 255 255 255;
+  --bgcardlabel: 25 28 49;
+  --bgbuttoncard: 56 62 104;
+  --borderbuttoncard: 59 62 104;
+
+  /* Carrito */
+
+  --bgcardprice: 56 62 104;
+  --coloricons: 255 255 255;
+  --bordercupon: 81 83 107;
+  --bgcuponbutton: 37 41 69;
+  --textcuponbutton: 255 255 255;
+  --bginputcupon: 25 28 49;
+  --bghovercupon: 56 62 104;
+  --bgprocesar: 37 41 69;
+  --bgedit: 56 62 104;
+
+  /* Modal */
+  --bgsubtitlemodal: 255 255 255;
+  --bgmodal: 37 41 69;
 }
